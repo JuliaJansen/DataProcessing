@@ -1,0 +1,220 @@
+/*
+ * Julia Jansen
+ * data week 2
+ * css svg map
+ *
+ * Circles around small countries
+ *
+ * Change opacity to 1 to display all circles.
+ *
+ */
+
+ p
+ {
+ 	font-size: 20px;
+   text-align: 100px;
+ 	font-family: helvetica;
+ }
+
+.circlexx
+{
+   opacity:0;
+   fill:#e0e0e0;
+   stroke:#000000;
+   stroke-width:0.5;
+}
+
+/*
+ * Smaller circles around French DOMs and Chinese SARs
+ *
+ * Change opacity to 1 to display all subnational circles.
+ *
+ */
+.subxx
+{
+   opacity:0;
+   stroke-width:0.3;
+}
+
+/*
+ * Circles around small, unrecognized countries
+ *
+ * Change opacity to 1 to display all circles.
+ *
+ */
+.unxx
+{
+   opacity:0;
+   fill:#e0e0e0;
+   stroke:#000000;
+   stroke-width:0.3;
+}
+
+/*
+ * Circles around small countries, but with no permanent residents 
+ *
+ * Change opacity to 1 to display all circles.
+ *
+ */
+.noxx
+{
+   opacity:0;
+   fill:#e0e0e0;
+   stroke:#000000;
+   stroke-width:0.5;
+}
+
+/*
+ * land
+ */
+.landxx
+{
+   fill: #e0e0e0;
+   stroke:#ffffff;
+   stroke-width:0.5;
+   fill-rule:evenodd;
+}
+
+/*
+ * Styles for coastlines of islands with no borders
+ */
+.coastxx
+{
+   fill: #e0e0e0;
+   stroke:#ffffff;
+   stroke-width:0.3;
+   fill-rule:evenodd;
+}
+
+/*
+ * Styles for nations with limited recognition
+ */
+.limitxx
+{
+   fill: #e0e0e0;
+   stroke:#ffffff;
+   stroke-width:0;
+   fill-rule:evenodd;
+}
+
+/*
+ * Styles for nations with no permanent population.
+ */
+.antxx
+{
+   fill: #e0e0e0;
+   stroke:#ffffff;
+   stroke-width:0;
+   fill-rule:evenodd;
+}
+
+/*
+ * Ocean
+ */
+.oceanxx
+{
+   opacity: 0.1;
+   color: #000000;
+   fill: #ffffff;
+   stroke:#000;
+   stroke-width:0.5;
+   stroke-miterlimit:1;
+   z-index: -1;
+}
+
+#high_urb
+{
+   fill: #d95f0e;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+#highest_urb
+{
+   fill: #993404;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+#legend
+{
+   fill: none;
+   stroke: #737373;
+   stroke-width: 3;
+   stroke-opacity: 0.9;
+}
+
+#legend_text
+{
+   font-family: verdana;
+   font-size: 20px; 
+   color: #737373;
+}
+
+#legend_title
+{
+   font-family: verdana;
+   font-size: 18px; 
+   font-weight: bold;
+   color: #737373;
+}
+
+#low_urb
+{
+   fill: #fed98e;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+#lowest_urb
+{
+   fill: #ffffd4;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+#middle_urb
+{
+   fill: #fe9929;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+#title
+{
+   padding-left: 300px;
+}
+
+
+
+/*
+ * Additional style rules
+ *
+ * The following are examples of colouring countries.  You can substitute these with your own styles to colour the countries on the map.
+ *
+ * Color a few countries:
+ *
+ * .gb, .au, .nc
+ * {
+ *    fill:       #ff0000;
+ * }
+ *
+ * Color a few small country circles (and the countries):
+ *
+ * .ms, .ky
+ * {
+ *    opacity:    1;
+ *    fill:       #ff0000;
+ * }
+ *
+ */
