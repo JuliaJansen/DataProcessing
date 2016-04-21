@@ -4,7 +4,7 @@
  * Data Processing
  */
 
-document = "svg.html"; 
+document = "svg1.html"; 
 
 /* use this to test out your function */
 window.onload = function() {
