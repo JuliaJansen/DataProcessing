@@ -1,11 +1,7 @@
 /*
  * Julia Jansen
- * data week 2
+ * Data Processing week 2
  * css svg map
- *
- * Circles around small countries
- *
- * Change opacity to 1 to display all circles.
  *
  */
 
@@ -122,24 +118,60 @@
    z-index: -1;
 }
 
-#high_urb
+/*
+ * Styles for text underneath map
+ */
+.indent
 {
-   fill: #d95f0e;
+   padding-left: 50px;
+   padding-right: 150px;
+}
+
+.text_bottom
+{
+   font-size: 12px;
+   font-family: verdana;
+}
+
+/*
+ * Countries with high percentage urban population
+ */
+#high
+{
+   fill: #ec7014;
    stroke: #737373;
    stroke-width: 3;
    fill-opacity: 1;
    stroke-opacity: 0.9;
 }
 
-#highest_urb
+/*
+ * Countries with higher percentage urban population
+ */
+#higher
 {
-   fill: #993404;
+   fill: #cc4c02;
    stroke: #737373;
    stroke-width: 3;
    fill-opacity: 1;
    stroke-opacity: 0.9;
 }
 
+/*
+ * Countries with highest percentage urban population
+ */
+#highest
+{
+   fill: #8c2d04;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+/*
+ * legend style
+ */
 #legend
 {
    fill: none;
@@ -148,31 +180,55 @@
    stroke-opacity: 0.9;
 }
 
+/*
+ * text in legend
+ */
 #legend_text
 {
    font-family: verdana;
-   font-size: 20px; 
+   font-size: 22px; 
    color: #737373;
 }
 
+/*
+ * title in legend
+ */
 #legend_title
 {
    font-family: verdana;
-   font-size: 18px; 
+   font-size: 20px; 
    font-weight: bold;
    color: #737373;
 }
 
-#low_urb
+/*
+ * Countries with low percentage urban population
+ */
+#low
 {
-   fill: #fed98e;
+   fill: #fec44f;
    stroke: #737373;
    stroke-width: 3;
    fill-opacity: 1;
    stroke-opacity: 0.9;
 }
 
-#lowest_urb
+/*
+ * Countries with lower percentage urban population
+ */
+#lower
+{
+   fill: #fee391;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   stroke-opacity: 0.9;
+}
+
+/*
+ * Countries with lowwest percentage urban population
+ */
+#lowest
 {
    fill: #ffffd4;
    stroke: #737373;
@@ -181,7 +237,10 @@
    stroke-opacity: 0.9;
 }
 
-#middle_urb
+/*
+ * Countries with 'middle' percentage urban population
+ */
+#middle
 {
    fill: #fe9929;
    stroke: #737373;
@@ -190,31 +249,32 @@
    stroke-opacity: 0.9;
 }
 
-#title
+/*
+ * Countries with missing data
+ */
+#missing
 {
-   padding-left: 300px;
+   fill: #e0e0e0;
+   stroke: #737373;
+   stroke-width: 3;
+   fill-opacity: 1;
+   fill-opacity: 1;
 }
 
-
+/*
+ * Title of bottom text
+ */
+#title_bottom
+{
+   font-weight: bold;
+}
 
 /*
- * Additional style rules
- *
- * The following are examples of colouring countries.  You can substitute these with your own styles to colour the countries on the map.
- *
- * Color a few countries:
- *
- * .gb, .au, .nc
- * {
- *    fill:       #ff0000;
- * }
- *
- * Color a few small country circles (and the countries):
- *
- * .ms, .ky
- * {
- *    opacity:    1;
- *    fill:       #ff0000;
- * }
- *
+ * Visualisation title
  */
+#title
+{
+   padding-left: 250px;
+   font-weight: bold;
+}
+
