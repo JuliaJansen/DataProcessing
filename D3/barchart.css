@@ -3,4 +3,73 @@
  * barchart
  */ 
 
- /* nothing here yet... */ 
+/* style tooltip */
+div.tooltip 
+{ 
+    position: absolute;     
+    text-align: center;     
+    width: 50px;          
+    height: 14px;         
+    padding: 2px;       
+    font: 13px sans-serif; 
+    font-weight: bold;   
+    background: #ffcc80; 
+    border: 1;    
+    border-radius: 1px;     
+    pointer-events: none;     
+}
+
+/* stylize axis */
+.axis text 
+{
+  fill: black;
+  font: 20px sans-serif;
+}
+
+.axis path,
+.axis line 
+{
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path 
+{
+  display: visible;
+}
+
+/* bars */
+.chart rect 
+{
+  fill: #009999;
+}
+
+/* text */
+.chart text 
+{
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+#country
+{
+  fill: #e6e6e6;
+  font: 13px helvetica;
+}
+
+#percentage
+{
+  fill: #e6e6e6;
+  visibility: hidden;
+}
+
+#title
+{
+	font: 22px helvetica;
+  font-weight: bold;
+  text-align: center;	
+}
+
