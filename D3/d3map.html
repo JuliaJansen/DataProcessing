@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Julia Jansen -->
+<!-- Data Processing -->
+
+<html>
+	<head>
+		<title>D3 Map</title>
+		<link rel="stylesheet" type="text/css" href="d3map.css"/>
+
+        <!-- Datamaps Source -->
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+		<script src="Datamaps.js"></script>
+	</head>
+
+	<body>
+		<p id="title">Percentage of population living in the biggest city</p>
+		<p id="subtitle">2014</p>
+		<div id="container1" style="height: 500px; width: 1200px"></div>
+		<script src="d3map.js"></script>
+		<div class="indent">
+			<text class="text_bottom" id="title_bottom">Categories</text><br>
+			<text class="text_bottom">
+			This interactive map shows the percentage of a population that lives in the biggest city of that country. The data is defined in five categories of which the highest category is defined by a percentage above 90%. In that way, city-states really pop out. The other values are divided in four categories. 
+			</text><br><br>
+			<text class="text_bottom" id="title_bottom">Interactivity</text><br>
+			<text class="text_bottom">
+			When hovering over a country, the contours and colours of that county change to make it visually pop out. By broadening the strokewidth of the contours and colouring the stroke with a more saturized colour than the country's fill, a country seems to visually come forward towards the reader a bit. The orange color contrasts with the green map to make the difference between a highlighted country and the rest very clear. Further the precise data about a country is shown when hovering over it in a tooltip. 
+			<br><br>
+			My map shows to the reader immediately which countries population is highly centralized in one city and which countries have a more geographically divided population. It doesn't show which city is the biggest city of a country and my map also doesn't tell the reader about the overall urbanization level of a country. That might be information that interests a reader that is interested in this map. 
+			</text>
+		</div>
+	</body>
+</html>

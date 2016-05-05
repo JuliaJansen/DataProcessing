@@ -1,0 +1,46 @@
+/* Julia Jansen
+ * Data Processing
+ * d3 map
+ */ 
+
+/*
+ * Styles for text underneath map
+ */
+.indent
+{
+   padding-top: 50px;
+   padding-left: 50px;
+   padding-right: 150px;
+}
+
+.text_bottom
+{
+   font-size: 12px;
+   font-family: verdana;
+}
+
+ #container1
+{
+ 	position: relative;
+}
+
+#subtitle
+{
+	font: 18px helvetica;
+	text-align: center;	
+}
+
+#title
+{
+	font: 22px helvetica;
+	font-weight: bold;
+	text-align: center;	
+}
+
+/*
+ * Title of bottom text
+ */
+#title_bottom
+{
+   font-weight: bold;
+}
