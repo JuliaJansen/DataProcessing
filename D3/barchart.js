@@ -38,7 +38,7 @@ window.onload = function() {
 
 		// define how to scale the bars
 		var x = d3.scale.linear()
-    		.range([0, width]);
+    		.range([0, width - margin.right]);
 
     	// define scale of y-ax
 		var y = d3.scale.linear()
@@ -67,12 +67,13 @@ window.onload = function() {
 		  .append("g")
     		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    	// add a g element for each data point
 		var bar = chart.selectAll("g")
     		.data(data)
 		  .enter().append("g")
     		.attr("transform", function(d, i) { return "translate(0," + i * barheight + ")"; });
 
-		// add a g element for each data point
+		// add a blue bar for each data point
 		bar.append("rect")
 			.attr("y", function(d, i) { return i })
 	  		.attr("width", function(d) { return x(0.01 * d.percentage) })
@@ -84,27 +85,28 @@ window.onload = function() {
 					div.html(num.toFixed(2) + "%")
 					   .style("left", (d3.event.pageX) + "px")
 					   .style("top", (d3.event.pageY - 28) + "px");
-
 				})
 			.on("mouseout", function(d) { d3.select(this).style("fill", "#009999") });
 
+		// append country names
 	    bar.append("text")
 	    	.attr("id", "country")
-	    	.attr("x", 6)
-	    	.attr("y", function(d, i) { return i + 5 })
+	    	.attr("x", function(d) { 
+	    		if (d.percentage < 15) {
+	    			x = 8 * d.percentage;
+	    			return x.toFixed(2);
+	    		}
+	    		else { 
+	    			return 6;
+	    		}})
+	    	.attr("y", function(d, i) { return i + 5; })
 	    	.attr("dy", ".75em")
 	    	.text(function(d) { return d.country })
-	    	.style("text-anchor", "start");
-	    	.on("mouseover", function(d) { 
-					d3.select("rect").style("fill",  "#e68a00");
-					// div.style("visibility", "visible");
-					// var num = 1 * d.percentage;
-					// div.html(num.toFixed(2) + "%")
-					//    .style("left", (d3.event.pageX) + "px")
-					//    .style("top", (d3.event.pageY - 28) + "px");
-
-				})
-			.on("mouseout", function(d) { d3.select(this).style("fill", "#009999") });
+	    	.style("fill", function(d) { 
+	    		if (d.percentage < 15) {
+	    			return "#009999";
+	    		}})
+	    	.style("text-anchor", "start" );
 
 		// add x axis
 		chart.append("g")
@@ -117,9 +119,9 @@ window.onload = function() {
       		.attr("class", "y axis")
       		.call(yAxis)
       	  .append("text")
-    		.attr("transform", "rotate(90)")
-    		.attr("y", 15)
-    		.attr("x", 10)
+    		.attr("transform", "rotate(-90)")
+    		.attr("y", -15)
+    		.attr("x", -40)
     		.attr("dy", ".71em")
     		.style("text-anchor", "start")
     		.text("Country");
