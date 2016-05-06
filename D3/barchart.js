@@ -8,6 +8,21 @@ document = "barchart.html";
 
 window.onload = function() {
 
+	// load EU country codes
+	var eu = "countrycodesEU.json";
+	var eu_codes = [];
+
+	d3.json(eu, function (datum) {
+
+		var codes = datum.points;
+
+		// make array of country codes EU
+		for (var i = 0; i < codes.length; i++) {
+			eu_codes.push(codes[i].code);
+			console.log(eu_codes[i]);
+		}
+	})
+
 	// load json with d3
 	var json = "pop_in_largest_city_2014.json";
 	d3.json(json, function (data) {
@@ -15,9 +30,9 @@ window.onload = function() {
 		var temp = data.points;
 		var data = [];
 
-		// use only data points for countries with information
+		// use only data points for European countries with information
 		for (var i = 0; i < temp.length; i++) {
-			if (temp[i].percentage > 0) {
+			if (temp[i].percentage > 0 && in_eu(temp[i].code, eu_codes)) {
 				data.push(temp[i]);
 			}
 		}
@@ -26,9 +41,7 @@ window.onload = function() {
     		return parseFloat(b.percentage) - parseFloat(a.percentage);
 		});
 
-		console.log("data length = ", data.length);
-
-		margin
+		// margins 
 		var margin = {top: 20, right: 30, bottom: 30, left: 30};
 
 		// width of chart and height of bars
@@ -128,3 +141,21 @@ window.onload = function() {
 
 	});
 };
+
+/* 
+ * Function returns true is country is part of the EU,
+ * else false. 
+ */
+function in_eu(value, array) {
+	
+	for (var i = 0; i < array.length; i++) {
+		
+		// if code in eu_code list, return true
+		if (value == array[i]) {
+			return true;
+		} 
+	}
+
+	// if code not in eu_code list, return false
+	return false;
+}

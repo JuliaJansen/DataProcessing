@@ -78,7 +78,10 @@ window.onload = function() {
 	});
 }
 
-// function returns value category as string
+
+/* 
+ * Function returns value category as string.
+ */
 function value(percentage)
 { 
 	if (percentage > 90) {
