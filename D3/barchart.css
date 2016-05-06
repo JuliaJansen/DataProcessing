@@ -8,13 +8,13 @@ div.tooltip
 { 
     position: absolute;     
     text-align: center;     
-    width: 50px;          
-    height: 14px;         
+    width: 73px;          
+    height: 30px;         
     padding: 2px;       
     font: 13px sans-serif; 
     font-weight: bold;   
     background: #ffcc80; 
-    border: 1;    
+    border: 2;    
     border-radius: 1px;     
     pointer-events: none;     
 }
@@ -64,6 +64,12 @@ div.tooltip
 {
   fill: #e6e6e6;
   visibility: hidden;
+}
+
+#subtitle
+{
+  font: 16px helvetica;
+  text-align: center;
 }
 
 #title

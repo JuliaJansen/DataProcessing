@@ -42,32 +42,31 @@ window.onload = function() {
 		});
 
 		// margins 
-		var margin = {top: 20, right: 10, bottom: 30, left: 70};
+		var margin = {top: 20, right: 30, bottom: 30, left: 30};
 
 		// width of chart and height of bars
-		var width = 1000 - margin.left - margin.right, 
-			height = margin.top + 500,
-			barwidth = width / data.length;
+		var width = 800 - margin.left - margin.right, 
+			height = margin.top + 20 * 159,
+			barheight = 20;
 
 		// define how to scale the bars
 		var x = d3.scale.linear()
-			.domain(data)
-			.range([0, data.length * barwidth]);
+    		.range([0, width - margin.right]);
 
     	// define scale of y-ax
 		var y = d3.scale.linear()
-			.domain([0, 0.55])
-    		.range([500, 0]);
+    		.range([height, 0]);
 
     	// x-axis
     	var xAxis = d3.svg.axis()
     		.scale(x)
    	 		.orient("top")
+   	 		.ticks(10, "%");
 
    	 	var yAxis = d3.svg.axis()
    	 		.scale(y)
     		.orient("left")
-    		.ticks(10, "%");
+    		.ticks(NaN);
 
     	// make tooltip
   		var div = d3.select("body").append("div")	
@@ -76,7 +75,6 @@ window.onload = function() {
 
     	// select chart
 		var chart = d3.select(".chart")
-			.attr("position", "center")
 		    .attr("width", width + margin.left) 
 		    .attr("height", height + margin.top)
 		  .append("g")
@@ -86,26 +84,18 @@ window.onload = function() {
 		var bar = chart.selectAll("g")
     		.data(data)
 		  .enter().append("g")
-    		.attr("transform", function(d, i) { return "translate(" + i * barwidth + ", 0)"; });
+    		.attr("transform", function(d, i) { return "translate(0," + i * barheight + ")"; });
 
 		// add a blue bar for each data point
 		bar.append("rect")
-			.attr("y", function(d, i) { return y(0.01 * d.percentage) })
-	  		.attr("width", barwidth - 4) // function(d) { return x(0.01 * d.percentage) })
-			.attr("height", function(d) { return height - y(0.01 * d.percentage) - margin.top })
+			.attr("y", function(d, i) { return i })
+	  		.attr("width", function(d) { return x(0.01 * d.percentage) })
+			.attr("height", barheight - 1)
 			.on("mouseover", function(d) { 
-
-					// tooltip should appear at mouse position
 					d3.select(this).style("fill",  "#e68a00");
 					div.style("visibility", "visible");
 					var num = 1 * d.percentage;
-					country = d.country;
-					div.html(d.country + ":<br>" + num.toFixed(2) + "%")
-					   .style("height", function(d) { 
-					   		if (country.search(" ") > 0) {
-					   			return "45px";
-					   		}
-					   	})
+					div.html(num.toFixed(2) + "%")
 					   .style("left", (d3.event.pageX) + "px")
 					   .style("top", (d3.event.pageY - 28) + "px");
 				})
@@ -114,36 +104,41 @@ window.onload = function() {
 		// append country names
 	    bar.append("text")
 	    	.attr("id", "country")
-	    	.attr("y", 5)
-	    	.attr("x", -height + margin.top + 8)
+	    	.attr("x", function(d) { 
+	    		if (d.percentage < 15) {
+	    			x = 8 * d.percentage;
+	    			return x.toFixed(2);
+	    		}
+	    		else { 
+	    			return 6;
+	    		}})
+	    	.attr("y", function(d, i) { return i + 5; })
 	    	.attr("dy", ".75em")
-	    	.attr("transform", "rotate(-90)")
 	    	.text(function(d) { return d.country })
+	    	.style("fill", function(d) { 
+	    		if (d.percentage < 15) {
+	    			return "#009999";
+	    		}})
 	    	.style("text-anchor", "start" );
 
 		// add x axis
 		chart.append("g")
 		    .attr("class", "x axis")
-		    .attr("transform", "translate(0," + (height - margin.top) + ")")
-		    .call(xAxis)
-		  .append("text")
-    		.attr("y", 8)
-    		.attr("x", 10)
-    		.attr("dy", ".71em")
-    		.style("text-anchor", "start")
-    		.text("http://data.worldbank.org/indicator/EN.URB.LCTY.UR.ZS");
+		    .attr("transform", function(d, i) { return "translate(0," + i * barheight + ")"})
+		    .call(xAxis);
 
 		// add y axis
 		chart.append("g")
       		.attr("class", "y axis")
       		.call(yAxis)
       	  .append("text")
-    		.attr("y", -18)
-    		.attr("x", -65)
-    		.style("font-weight", "bold")
+    		.attr("transform", "rotate(-90)")
+    		.attr("y", -15)
+    		.attr("x", -40)
     		.attr("dy", ".71em")
     		.style("text-anchor", "start")
-    		.text("Percentage");
+    		.text("Country");
+
 	});
 };
 

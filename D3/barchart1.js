@@ -99,13 +99,7 @@ window.onload = function() {
 					d3.select(this).style("fill",  "#e68a00");
 					div.style("visibility", "visible");
 					var num = 1 * d.percentage;
-					country = d.country;
-					div.html(d.country + ":<br>" + num.toFixed(2) + "%")
-					   .style("height", function(d) { 
-					   		if (country.search(" ") > 0) {
-					   			return "45px";
-					   		}
-					   	})
+					div.html(num.toFixed(2) + "%")
 					   .style("left", (d3.event.pageX) + "px")
 					   .style("top", (d3.event.pageY - 28) + "px");
 				})
@@ -131,19 +125,12 @@ window.onload = function() {
     		.attr("x", 10)
     		.attr("dy", ".71em")
     		.style("text-anchor", "start")
-    		.text("http://data.worldbank.org/indicator/EN.URB.LCTY.UR.ZS");
+    		.text("Country");
 
 		// add y axis
 		chart.append("g")
       		.attr("class", "y axis")
-      		.call(yAxis)
-      	  .append("text")
-    		.attr("y", -18)
-    		.attr("x", -65)
-    		.style("font-weight", "bold")
-    		.attr("dy", ".71em")
-    		.style("text-anchor", "start")
-    		.text("Percentage");
+      		.call(yAxis);
 	});
 };
 
