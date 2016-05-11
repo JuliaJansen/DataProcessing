@@ -24,7 +24,7 @@ div
 .svg 
 {
 	fill: none;
-  	stroke: #000;
+  	stroke: #fff;
   	stroke-width: 1px;
 }
 
@@ -32,23 +32,40 @@ div
 .axis text 
 {
   fill: black;
-  font: 14px sans-serif;
+  font: 9px sans-serif;
 }
 
-.axis path,
+.axis path
+{
+	fill: none;
+  	stroke: #404040;
+  	shape-rendering: crispEdges;
+}
+
 .axis line 
 {
   fill: none;
-  stroke: #000;
-  stroke-width: 2px;
+  stroke: #404040;
   shape-rendering: crispEdges;
+  visibility: hidden;
 }
 
+.circle
+{
+	fill: #006666;
+	stroke: #000;
+}
 .x.axis path 
 {
   display: visible;
 }
 
+.line 
+{
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
 
 #source
 {

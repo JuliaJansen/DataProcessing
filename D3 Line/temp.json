@@ -1,5 +1,4 @@
-{
-	"points" : [
+[
 		{"temperature": "4.147721", "month": "1", "null": [""], "country_code": "IRN", "year": "1990"},
 		{"temperature": "6.406695", "month": "2", "null": [""], "country_code": "IRN", "year": "1990"},
 		{"temperature": "11.216524", "month": "3", "null": [""], "country_code": "IRN", "year": "1990"},
@@ -551,7 +550,5 @@
 		{"temperature": "14.235293", "month": "9", "null": [""], "country_code": "NLD", "year": "2012"},
 		{"temperature": "10.447059", "month": "10", "null": [""], "country_code": "NLD", "year": "2012"},
 		{"temperature": "6.894118", "month": "11", "null": [""], "country_code": "NLD", "year": "2012"},
-		{"temperature": "4.967647", "month": "12", "null": [""], "country_code": "NLD", "year": "2012"},
-{}
-	]
-}
+		{"temperature": "4.967647", "month": "12", "null": [""], "country_code": "NLD", "year": "2012"}
+]
