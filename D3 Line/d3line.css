@@ -1,0 +1,67 @@
+/* Julia Jansen
+ * Data Processing
+ * d3 Line
+ */ 
+
+div
+{
+	font-family: helvetica;
+	text-align: center;
+}
+
+.svg text
+{
+	font: 10px helvetica;
+}
+
+.footer
+{
+	font-size: 14px;
+	text-align: right;
+	font-style: italic;
+}
+
+.svg 
+{
+	fill: none;
+  	stroke: #000;
+  	stroke-width: 1px;
+}
+
+/* stylize axis */
+.axis text 
+{
+  fill: black;
+  font: 14px sans-serif;
+}
+
+.axis path,
+.axis line 
+{
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path 
+{
+  display: visible;
+}
+
+
+#source
+{
+	font-size: 10px;
+}
+
+#subtitle
+{
+	font-size: 18px;
+}
+
+#title
+{
+	font-size: 20px helvetica;
+	font-weight: bold;
+}
