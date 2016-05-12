@@ -9,6 +9,22 @@ div
 	text-align: center;
 }
 
+div.tooltip 
+{   
+  position: absolute;           
+  text-align: center;           
+  width: 60px;                  
+  height: 30px;                 
+  padding: 2px;             
+  font: 12px helvetica;      
+  background: #339966;   
+  opacity: 0.8;
+  border: 2px;  
+  border-color: #000;    
+  border-radius: 2px;           
+  pointer-events: none;         
+}
+
 .svg text
 {
 	font: 10px helvetica;
@@ -52,9 +68,30 @@ div
 
 .circle
 {
-	fill: #006666;
-	stroke: #000;
+	fill: #1b9e77;
+	stroke: #006666;
 }
+
+.overlay 
+{
+    fill: none;
+    stroke: none;
+    pointer-events: all;
+}
+
+.focusLine 
+{
+    fill: none;
+    stroke: #8c8c8c;
+    stroke-width: 0.8px;
+}
+
+.focusCircle 
+{
+	fill: #000;
+	stroke: #006666;
+}
+
 .x.axis path 
 {
   display: visible;
@@ -63,7 +100,7 @@ div
 .line 
 {
   fill: none;
-  stroke: steelblue;
+  stroke: #1b9e77;
   stroke-width: 1.5px;
 }
 
