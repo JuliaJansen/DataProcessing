@@ -131,19 +131,22 @@ function makeGraph(error, temp, rain) {
 	        .attr('id', function(d){ return d.key; });
 
 	    legendEnter.append('circle')
-	        .attr('cx', width +20)
-	        .attr('cy', function(d){return legendscale(d.values[d.values.length-1].value);})
+	        .attr('cx', width )
+	        .attr('cy', height - 110)
 	        .attr('r', 7)
 	        .style('fill', function(d) { 
-	        	if (d.key)
-	          	return color(d.name);
+	        	if (d.key == "IRN") {
+	        		return "#d95f02"
+	        	} else {
+	          		return "#1b9e77";
+	          	}
         });
         	        	
-	//add the legend text
-    legendEnter.append('text')
-        .attr('x', width+35)
-        .attr('y', function(d){return legendscale(d.values[d.values.length-1].value);})
-        .text(function(d){ return d.name; });
+		//add the legend text
+	    legendEnter.append('text')
+	        .attr('cx', width - 30)
+	        .attr('cy', height - 100)
+	        .text(function(d){ return d.name; });
 
 		// append a g for each country
 		var country = svg.selectAll(".country")
