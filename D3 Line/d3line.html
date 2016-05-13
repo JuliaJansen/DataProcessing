@@ -15,15 +15,16 @@
 	</head>
 
 	<body>
+		<script src="d3line.js"></script>
 		<div id="wrapper">
 			<div id="header">
 				<p id="title">Climate data Iran &amp the Netherlands</p>
-				<p id="subtitle">2010 - 2012</p>
+				<p id="subtitle">2000 - 2012</p>
 			</div>
-			<p id="data" class="menu">Select data: 
+			<p class="menu">Select data: 
 				<select>
-				<option value="val1">Temperature</option>
-				<option value="val2">Rainfall</option>
+				<option id="temp" onclick="updateData(this)">Temperature</option>
+				<option id="rain" onclick="updateData(this)">Rainfall</option>
 				</select>
 			<div id="content"></div>
 			<div id="footer">

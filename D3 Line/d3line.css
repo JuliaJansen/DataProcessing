@@ -14,11 +14,11 @@ div.tooltip
   position: absolute;           
   text-align: center;           
   width: 60px;                  
-  height: 30px;                 
+  height: 45px;                 
   padding: 2px;             
   font: 12px helvetica;      
   background: #c6ecd9;   
-  opacity: 0.8;
+  opacity: 0.9;
   border: 2px;  
   border-color: #000;    
   border-radius: 2px;           
@@ -69,7 +69,6 @@ div.tooltip
 .circle
 {
 	fill: #ffffff;
-	stroke: #006666;
 	stroke-width: 1.5px;
 }
 
@@ -112,6 +111,18 @@ div.tooltip
 	font-size: 10pt;
 	margin-bottom:0px;
 	fill: #231F20; 
+}
+
+#cIRN,
+#IRN
+{
+	stroke: #d95f02;
+}
+
+#cNLD,
+#NLD
+{
+	stroke: #1b9e77;
 }
 
 #source
