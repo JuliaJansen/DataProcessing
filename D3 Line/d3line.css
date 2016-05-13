@@ -25,6 +25,11 @@ div.tooltip
   pointer-events: none;         
 }
 
+.svg 
+{
+	position: absolute;
+}
+
 .svg text
 {
 	font: 10px helvetica;
@@ -139,4 +144,14 @@ div.tooltip
 {
 	font-size: 20px helvetica;
 	font-weight: bold;
+}
+
+#menu
+{
+	font: 12px helvetica; 
+	width: 120px;   
+	height: 40px;
+  	background: #b3b3b3;   
+  	opacity: 0.7;
+  	margin-left: 950px;
 }

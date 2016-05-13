@@ -1,5 +1,4 @@
-{
-	"points" : [
+[
 		{"value": "34.081055", "month": "1", "null": [""], "country_code": "IRN", "year": "1990"},
 		{"value": "38.749", "month": "2", "null": [""], "country_code": "IRN", "year": "1990"},
 		{"value": "20.996153", "month": "3", "null": [""], "country_code": "IRN", "year": "1990"},
@@ -551,7 +550,5 @@
 		{"value": "50.244118", "month": "9", "null": [""], "country_code": "NLD", "year": "2012"},
 		{"value": "106.36765", "month": "10", "null": [""], "country_code": "NLD", "year": "2012"},
 		{"value": "45.27647", "month": "11", "null": [""], "country_code": "NLD", "year": "2012"},
-		{"value": "125.58529", "month": "12", "null": [""], "country_code": "NLD", "year": "2012"},
-{}
-	]
-}
+		{"value": "125.58529", "month": "12", "null": [""], "country_code": "NLD", "year": "2012"}
+]

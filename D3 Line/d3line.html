@@ -10,7 +10,7 @@
 
         <!-- Datamaps Source -->
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-		<script src="https://d3js.org/d3-queue.v2.min.js"></script>
+        <script src="https://d3js.org/d3-queue.v2.min.js"></script>
 
 	</head>
 
@@ -21,10 +21,9 @@
 				<p id="title">Climate data Iran &amp the Netherlands</p>
 				<p id="subtitle">2000 - 2012</p>
 			</div>
-			<p class="menu">Select data: 
-				<select>
-				<option id="temp" onclick="updateData(this)">Temperature</option>
-				<option id="rain" onclick="updateData(this)">Rainfall</option>
+			<p id="menu" class="menuchoice">Select: <select>
+				<option value="rain">Temperatures</option>
+				<option value="temp">Rainfall</option>
 				</select>
 			<div id="content"></div>
 			<div id="footer">

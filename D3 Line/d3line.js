@@ -15,16 +15,17 @@ window.onload = function() {
 /* 
  * load data, make graph 
  */
-
 function makeGraph(error, temp, rain) {
 	// check for errors while loading the page
 	if (error) throw error;
+	
+	var temp = temp;
+	var rain = rain;
 
-	updateData("temp");
+	updateData("temp")
 
 	function updateData(dataset) {
 
-		console.log("hellooooo?");
 		// set margins
 		var margin = {top: 30, right: 30, bottom: 30, left: 50},
 			width = 960 - margin.left - margin.right,
@@ -46,9 +47,13 @@ function makeGraph(error, temp, rain) {
 			.scale(y)
 			.orient("left");
 
+		// remove old tooltip
+		d3.select("#tipsy").remove();
+
 		// make tooltip
 		var div = d3.select("#content").append("div")	
-			.attr("class", "tooltip")				
+			.attr("class", "tooltip")		
+			.attr("id", "tipsy")		
 			.style("visibility", "hidden");
 
 		// draw path of graph
@@ -56,13 +61,11 @@ function makeGraph(error, temp, rain) {
 			.x(function(d) { return x(d.date); })
 			.y(function(d) { return y(d.value); });
 		
-		// select data array
 		if (dataset == "rain") {
 			temporary = rain;
-		} else {
+		} else if (dataset == "temp") {
 			temporary = temp;
-		}
- 	
+		} 	
 		data = [];
 
 		var formatDate = d3.time.format("%Y%m");
@@ -70,13 +73,16 @@ function makeGraph(error, temp, rain) {
 		for (var i = 0; i < temporary.length; i++) {
 			if (+temporary[i].year > 1999) {
 		 		date = formatDate.parse(temporary[i].year + temporary[i].month);
-		 		data.push({"date": date, "value": +temporary[i].value, "country": temporary[i].country_code})
+		 		data.push({"date": date, "value": +temporary[i].value, "country": temporary[i].country_code});
 			}
 		}
-		console.log(data);
+
+		// remove ols svg to redraw
+		d3.select("#amazing").remove();
 
 		// select dom element to attach svg
 		var svg = d3.select("#content").append("svg")
+			.attr("id", "amazing")
 			.attr("width", 960)
 			.attr("height", 500)
 		  .append("g")
@@ -88,10 +94,10 @@ function makeGraph(error, temp, rain) {
 			.entries(data);
 
 		x.domain(d3.extent(data, function(d) { return d.date; }));
-			y.domain([
+		y.domain([
 		    d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.value; }); }),
 		    d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.value; }); })
-			]);
+		]);
 
 		// add X axis
 		svg.append("g")
@@ -108,7 +114,36 @@ function makeGraph(error, temp, rain) {
 			.attr("y", -40)
 			.attr("dy", ".71em")
 			.style("text-anchor", "end")
-			.text("Average Temperature (Celsius)");
+			.text(function(d) { 
+				if (dataset == "temp") {
+					return "Average Temperature/month (Celsius)";
+				} else if (dataset == "rain") {
+					return "Average Rainfall/month (mm)";
+				}});
+
+		var legend = svg.selectAll('.legend')
+        	.data(countries);
+    
+	    var legendEnter = legend
+	        .enter()
+	        .append('g')
+	        .attr('class', 'legend')
+	        .attr('id', function(d){ return d.key; });
+
+	    legendEnter.append('circle')
+	        .attr('cx', width +20)
+	        .attr('cy', function(d){return legendscale(d.values[d.values.length-1].value);})
+	        .attr('r', 7)
+	        .style('fill', function(d) { 
+	        	if (d.key)
+	          	return color(d.name);
+        });
+        	        	
+	//add the legend text
+    legendEnter.append('text')
+        .attr('x', width+35)
+        .attr('y', function(d){return legendscale(d.values[d.values.length-1].value);})
+        .text(function(d){ return d.name; });
 
 		// append a g for each country
 		var country = svg.selectAll(".country")
@@ -141,16 +176,7 @@ function makeGraph(error, temp, rain) {
 		    .attr("cy", function(d) { return y(d.value); })
 		    .style("stroke", "#999999");
 
-		// // Line labels
-		// country.append("text")
-		// 	.datum(function(d) { return { name: d.key, value: d.values[d.values.length - 1]}; })
-		// 	.attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(d.value) + ")"; })
-		// 	.attr("x", 3)
-		// 	.attr("y", 25)
-		// 	.attr("dy", ".35em")
-		// 	.text(function(d) { return d.name; });
-
-		var focus = country.append("g")
+		var focus = svg.append("g")
 			.style("display", "none");
 
 		focus.append('line')
@@ -187,7 +213,10 @@ function makeGraph(error, temp, rain) {
 	            // highlight closest data point 
 	            focus.select('#focusCircle')
 	                .attr('cx', x(x0))
-	                .attr('cy', y(d));
+	                .attr('cy', y(d0));
+	            focus.select('#focusCircle2')
+	                .attr('cx', x(x0))
+	                .attr('cy', y(d1));
 	            focus.select('#focusLineX')
 	                .attr('x1', x(x0))
 	                .attr('y1', 0)
@@ -196,8 +225,26 @@ function makeGraph(error, temp, rain) {
 	            div.style("visibility", "visible");
 				div.html(prettydate(data[i].date) + ":<br>" + round(d0) + type)
 					.style("left", (d3.event.pageX) + "px")		
-                	.style("top", y(d0) + (margin.top * 2) + "px");
+                	.style("top", margin.top + 100 + "px");
 			});
+
+		d3.legend
+
+		// force data to update when menu is changed    
+		var menu = d3.select("#menu select")
+    		.on("change", change);
+
+    	var series = menu.property("value");
+
+    	// set terms of transition that will take place
+		// when a new economic indicator is chosen   
+		function change() {
+			console.log("change?", series);
+			updateData(series);
+		    // d3.transition()
+		    //   .duration(1500)
+		    //   .each(updateData(series));
+		}
 	}
 }
 
