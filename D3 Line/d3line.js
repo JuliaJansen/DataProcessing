@@ -154,12 +154,6 @@ function makeGraph(error, temp, rain) {
 	x.domain(d3.extent(temporary, function(d) { return d.month; }));
   	y.domain(d3.extent(temporary, function(d) { return d.temperature; }));
 
- //  	//make a rectangle so there is something to click on
-	// svg.append("svg:rect")
-	// 	.attr("width", width)
-	// 	.attr("height", height)
-	// 	.attr("class", "plot");
-
   	// add X axis
     svg.append("g")
 		.attr("class", "x axis")
@@ -202,7 +196,8 @@ function makeGraph(error, temp, rain) {
       	.attr("class", "circle")
         .attr("r", 3.5)
         .attr("cx", function(d) { return x(d.month); })
-        .attr("cy", function(d) { return y(d.temperature); });
+        .attr("cy", function(d) { return y(d.temperature); })
+        .style("stroke", "#1b9e77");
     
     // Add line 2011
   	svg.append("path")
@@ -229,7 +224,13 @@ function makeGraph(error, temp, rain) {
         .attr("r", 3.5)
         .attr("cx", function(d) { return x(d.month); })
         .attr("cy", function(d) { return y(d.temperature); })
-        .style("fill", "#ffffff");
+        .style("fill", "#ffffff")
+        .style("stroke", "#d95f02")
+        .on("mouseover", function(d) {
+        	d3.select(this)
+        		.attr("r", 5.0)
+        		.style("stroke-width", "2.5px");
+        });
 
     // Add line 2012
   	svg.append("path")
@@ -256,7 +257,8 @@ function makeGraph(error, temp, rain) {
         .attr("r", 3.5)
         .attr("cx", function(d) { return x(d.month); })
         .attr("cy", function(d) { return y(d.temperature); })
-        .style("fill", "#ffffff");
+        .style("fill", "#ffffff")
+        .style("stroke", "#7570b3");
 
     var focus = svg.append("g")
     	.style("display", "none");
@@ -280,8 +282,8 @@ function makeGraph(error, temp, rain) {
         .on('mouseout', function() { focus.style('display', 'none'); })
         .on('mousemove', function() { 
         	// get x-value on svg 
-        	Xmouse = d3.event.pageX - margin.left;
-         	Xvalue = x.invert(d3.event.pageX - margin.left);
+        	Xmouse = d3.event.pageX;
+         	Xvalue = x.invert(Xmouse);
             var decimals = Xvalue % 1;
 
             // round mouse position to whole number (month)
