@@ -17,7 +17,7 @@ div.tooltip
   height: 30px;                 
   padding: 2px;             
   font: 12px helvetica;      
-  background: #339966;   
+  background: #c6ecd9;   
   opacity: 0.8;
   border: 2px;  
   border-color: #000;    
@@ -68,7 +68,7 @@ div.tooltip
 
 .circle
 {
-	fill: #1b9e77;
+	fill: #ffffff;
 	stroke: #006666;
 }
 
@@ -88,8 +88,9 @@ div.tooltip
 
 .focusCircle 
 {
-	fill: #000;
-	stroke: #006666;
+	fill: #ff4d4d;
+	stroke: #1a1a1a;
+	stroke-width: 1px;
 }
 
 .x.axis path 
@@ -102,6 +103,14 @@ div.tooltip
   fill: none;
   stroke: #1b9e77;
   stroke-width: 1.5px;
+}
+
+.menu
+{
+	font-family: helvetica;
+	font-size: 10pt;
+	margin-bottom:0px;
+	fill: #231F20; 
 }
 
 #source

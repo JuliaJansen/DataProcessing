@@ -16,18 +16,24 @@ function makeGraph(error, temp, rain) {
 	// check for errors while loading the page
 	if (error) throw error;
 
+ 	// save temperature data in separate arrays 
  	var temporary = temp;
+ 	var tempdata = [];
  	var tempdata_irn_2010 = [];
  	var tempdata_irn_2011 = [];
  	var tempdata_irn_2012 = [];
+	var tempdata_nld_2010 = [];
+ 	var tempdata_nld_2011 = [];
+ 	var tempdata_nld_2012 = [];
 
- 	// make array with temperature data in Iran in 2010
- 	for (var i = 0; i < temporary.length; i++) {
+ 	// array temperatur, Iran, 2010
+	for (var i = 0; i < temporary.length; i++) {
  		if (temporary[i].country_code == "IRN") {
  			if (temporary[i].year == "2010") {
  				temporary[i].month = +temporary[i].month;
  				temporary[i].temperature = +temporary[i].temperature;
  				tempdata_irn_2010.push(temporary[i]);
+ 				// console.log(temporary[i]);
  			}
  		}
  	}
@@ -54,6 +60,58 @@ function makeGraph(error, temp, rain) {
  		}
  	}
 
+ 	// array temperatur, NL, 2010
+	for (var i = 0; i < temporary.length; i++) {
+ 		if (temporary[i].country_code == "NLD") {
+ 			if (temporary[i].year == "2010") {
+ 				temporary[i].month = +temporary[i].month;
+ 				temporary[i].temperature = +temporary[i].temperature;
+ 				tempdata_nld_2010.push(temporary[i]);
+ 				// console.log(temporary[i]);
+ 			}
+ 		}
+ 	}
+
+ 	// make array with temperature data in NL in 2011
+ 	for (var i = 0; i < temporary.length; i++) {
+ 		if (temporary[i].country_code == "NLD") {
+ 			if (temporary[i].year == "2011") {
+ 				temporary[i].month = +temporary[i].month;
+ 				temporary[i].temperature = +temporary[i].temperature;
+ 				tempdata_nld_2011.push(temporary[i]);
+ 			}
+ 		}
+ 	}
+
+ 	// make array with temperature data in NL in 2011
+ 	for (var i = 0; i < temporary.length; i++) {
+ 		if (temporary[i].country_code == "NLD") {
+ 			if (temporary[i].year == "2012") {
+ 				temporary[i].month = +temporary[i].month;
+ 				temporary[i].temperature = +temporary[i].temperature;
+ 				tempdata_nld_2012.push(temporary[i]);
+ 			}
+ 		}
+ 	}
+
+
+ 	// var tempdata_irn_2010 = makeDataArray("2010", "IRN", temp);
+ 	// var tempdata_irn_2011 = makeDataArray("2011", "IRN", temp);
+ 	// var tempdata_irn_2012 = makeDataArray("2012", "IRN", temp);
+ 	// var tempdata_nld_2010 = makeDataArray("2010", "NLD", temp);
+ 	// var tempdata_nld_2011 = makeDataArray("2011", "NLD", temp);
+ 	// var tempdata_nld_2012 = makeDataArray("2012", "NLD", temp);
+
+ 	// // save rainfall data in seperate arrays
+ 	// var raindata = rain;
+ 	// var raindata_irn_2010 = makeDataArray("2010", "IRN", rain);
+ 	// var raindata_irn_2011 = makeDataArray("2011", "IRN", rain);
+ 	// var raindata_irn_2012 = makeDataArray("2012", "IRN", rain);
+ 	// var raindata_nld_2010 = makeDataArray("2010", "NLD", rain);
+ 	// var raindata_nld_2011 = makeDataArray("2011", "NLD", rain);
+ 	// var raindata_nld_2012 = makeDataArray("2012", "NLD", rain);
+
+
 	var margin = {top: 30, right: 30, bottom: 30, left: 50},
     	width = 960 - margin.left - margin.right,
     	height = 500 - margin.top - margin.bottom;
@@ -61,7 +119,7 @@ function makeGraph(error, temp, rain) {
 	// var formatDate = d3.time.format("%d-%b-%y");
 
 	var x = d3.scale.linear()
-		.domain([1, 12])
+		.domain([month(1), month(12)])
 	    .range([0, width]);
 
 	var y = d3.scale.linear()
@@ -69,14 +127,15 @@ function makeGraph(error, temp, rain) {
 
 	var xAxis = d3.svg.axis()
 	    .scale(x)
-	    .orient("bottom");
+	    .orient("bottom")
+	    .ticks(month(x));
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left");
 
 	// make tooltip
-  	var div = d3.select("body").append("div")	
+  	var div = d3.select("#content").append("div")	
     	.attr("class", "tooltip")				
     	.style("visibility", "hidden");
 
@@ -94,6 +153,12 @@ function makeGraph(error, temp, rain) {
 	  	
 	x.domain(d3.extent(temporary, function(d) { return d.month; }));
   	y.domain(d3.extent(temporary, function(d) { return d.temperature; }));
+
+ //  	//make a rectangle so there is something to click on
+	// svg.append("svg:rect")
+	// 	.attr("width", width)
+	// 	.attr("height", height)
+	// 	.attr("class", "plot");
 
   	// add X axis
     svg.append("g")
@@ -115,16 +180,19 @@ function makeGraph(error, temp, rain) {
     // Add line 2010
   	svg.append("path")
   		.datum(tempdata_irn_2010)
-        .attr("class", "line")
-        .attr("d", line)
-        .on("mouseover", function(d) {
-			d3.select(this).style("stroke-width", "3.5px")
-				.style("stroke", "#0f5741")
-	    })
-	    .on("mouseout", function(d) {
-	    	d3.select(this).style("stroke-width", "1.5px")
-	    		.style("stroke", "#1b9e77")
-	    });
+     	.attr("class", "line")
+		.attr("stroke", "#404040")
+     	.attr("d", line)
+     	.on("mouseover", function(d) {
+			d3.select(this)
+				.style("stroke-width", "3.5px")
+				.style("stroke", "#0f5741");
+		})
+		.on("mouseout", function(d) {
+			d3.select(this)
+				.style("stroke-width", "1.5px")
+				.style("stroke", "#1b9e77");
+		});
 
 
     // Add the scatterplot 2010
@@ -141,7 +209,17 @@ function makeGraph(error, temp, rain) {
   		.datum(tempdata_irn_2011)
         .attr("class", "line")
         .style("stroke", "#d95f02")
-        .attr("d", line);
+        .attr("d", line)
+        .on("mouseover", function(d) {
+			d3.select(this)
+				.style("stroke-width", "3.5px")
+				.style("stroke", "#0f5741");
+	    })
+	    .on("mouseout", function(d) {
+	    	d3.select(this)
+	    		.style("stroke-width", "1.5px")
+	    		.style("stroke", "#1b9e77");
+	    });
 
     // Add the scatterplot 2011
     svg.selectAll("circle1")
@@ -151,14 +229,24 @@ function makeGraph(error, temp, rain) {
         .attr("r", 3.5)
         .attr("cx", function(d) { return x(d.month); })
         .attr("cy", function(d) { return y(d.temperature); })
-        .style("fill", "#d95f02");
+        .style("fill", "#ffffff");
 
     // Add line 2012
   	svg.append("path")
   		.datum(tempdata_irn_2012)
         .attr("class", "line")
         .style("stroke", "#7570b3")
-        .attr("d", line);
+        .attr("d", line)
+        .on("mouseover", function(d) {
+			d3.select(this)
+				.style("stroke-width", "3.5px")
+				.style("stroke", "#0f5741");
+	    })
+	    .on("mouseout", function(d) {
+	    	d3.select(this)
+	    		.style("stroke-width", "1.5px")
+	    		.style("stroke", "#1b9e77");
+	    });
 
     // Add the scatterplot 2012
     svg.selectAll("circle2")
@@ -168,7 +256,7 @@ function makeGraph(error, temp, rain) {
         .attr("r", 3.5)
         .attr("cx", function(d) { return x(d.month); })
         .attr("cy", function(d) { return y(d.temperature); })
-        .style("fill", "#7570b3");
+        .style("fill", "#ffffff");
 
     var focus = svg.append("g")
     	.style("display", "none");
@@ -180,7 +268,7 @@ function makeGraph(error, temp, rain) {
         .attr('class', 'focusLine');
     focus.append("circle")
     	.attr("id", "focusCircle")
-    	.attr("r", "4.5")
+    	.attr("r", "4.0")
     	.attr("class", "circle focusCircle");
 
     // add area to draw on
@@ -191,12 +279,10 @@ function makeGraph(error, temp, rain) {
         .on('mouseover', function() { focus.style('display', null); })
         .on('mouseout', function() { focus.style('display', 'none'); })
         .on('mousemove', function() { 
+        	// get x-value on svg 
         	Xmouse = d3.event.pageX - margin.left;
          	Xvalue = x.invert(d3.event.pageX - margin.left);
-            console.log("Xmouse", Xmouse);
-
             var decimals = Xvalue % 1;
-            console.log("decimals = ", decimals);
 
             // round mouse position to whole number (month)
             if (decimals < 0.5) {
@@ -207,7 +293,6 @@ function makeGraph(error, temp, rain) {
 
             var i = bisectMonth(tempdata_irn_2010, x_focus); // returns the index to the current data item
             var Ydata = tempdata_irn_2010[i].temperature;
-            console.log("Ydata = ", Ydata);
 
             // highlight closest data point 
             focus.select('#focusCircle')
@@ -219,9 +304,9 @@ function makeGraph(error, temp, rain) {
                 .attr('x2', Xmouse)
                 .attr('y2', height);
             div.style("visibility", "visible");
-				div.html(month(x_focus) + ":<br>" + round(tempdata_irn_2010[i].temperature) + "%")
-				   .style("left", x(x_focus) + "px")
-				   .style("top", y(Ydata) + "10");
+			div.html(month(x_focus) + ":<br>" + round(tempdata_irn_2010[i].temperature) + "&#8451")
+			   .style("left", x(x_focus) + "px")
+			   .style("top", y(Ydata) + "10");
         });
 
 }
@@ -266,21 +351,22 @@ function round(temp) {
 }
 
 
-/* 
- * Makes data array
- */
-function makeDataArray(year, country, temp, array) {
-	// make array with temperature data in Iran in 2010
- 	for (var i = 0; i < temp.length; i++) {
- 		if (temp[i].country_code == country) {
- 			if (temp[i].year == "2010") {
- 				temp[i].month = +temp[i].month;
- 				temp[i].temperature = +temp[i].temperature;
- 				array.push(temp[i]);
- 			}
- 		}
- 	}	
-	return array;
-}
+// /* 
+//  * Makes data array
+//  */
+// function makeDataArray(year, country, data) {
+// 	// make array with json data for country in year
+// 	var array = [];
+// 	for (var i = 0; i < data.length; i++) {
+//  		if (data.country_code == country) {
+//  			if (data[i].year == year) {
+//  				data[i].month = +data[i].month;
+//  				data[i].temperature = +data[i].temperature;
+//  				array.push(d);
+//  			}
+//  		}
+//  	}
+// 	return array;
+// }
 
-       
+//        
