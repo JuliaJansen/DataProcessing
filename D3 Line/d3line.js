@@ -77,6 +77,8 @@ function makeGraph(error, temp, rain) {
 			}
 		}
 
+		console.log(data);
+
 		// remove ols svg to redraw
 		d3.select("#amazing").remove();
 
@@ -92,6 +94,8 @@ function makeGraph(error, temp, rain) {
 		var countries = d3.nest() 
 			.key(function(d) { return d.country; })
 			.entries(data);
+
+		console.log("nested =", countries);
 
 		x.domain(d3.extent(data, function(d) { return d.date; }));
 		y.domain([
@@ -121,7 +125,7 @@ function makeGraph(error, temp, rain) {
 					return "Average Rainfall/month (mm)";
 				}});
 
-		var legend = svg.selectAll('.legend')
+		legend = svg.selectAll('.legend')
         	.data(countries);
     
 	    var legendEnter = legend
@@ -131,8 +135,15 @@ function makeGraph(error, temp, rain) {
 	        .attr('id', function(d){ return d.key; });
 
 	    legendEnter.append('circle')
-	        .attr('cx', width )
-	        .attr('cy', height - 110)
+	    	.attr("class", "legend")
+	        .attr('cx', width - margin.left)
+	        .attr('cy', function(d) {
+	        	if (d.key == "IRN") {
+	        		return height - 400
+	        	} else {
+	          		return height - 370;
+	          	}
+	        })
 	        .attr('r', 7)
 	        .style('fill', function(d) { 
 	        	if (d.key == "IRN") {
@@ -140,12 +151,18 @@ function makeGraph(error, temp, rain) {
 	        	} else {
 	          		return "#1b9e77";
 	          	}
-        });
+        	});
         	        	
 		//add the legend text
 	    legendEnter.append('text')
-	        .attr('cx', width - 30)
-	        .attr('cy', height - 100)
+	        .attr('cx', width - 20)
+	        .attr('cy', function(d) {
+	        	if (d.key == "IRN") {
+	        		return height - 400
+	        	} else {
+	          		return height - 370;
+	          	}
+	        })
 	        .text(function(d){ return d.name; });
 
 		// append a g for each country

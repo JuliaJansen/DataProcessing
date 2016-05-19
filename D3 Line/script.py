@@ -4,16 +4,15 @@
 
 '''
 This script reformats data from csv file
-into a useful json file that contains data, year, month, country code.
-http://sdwebx.worldbank.org/climateportal/index.cfm?page=downscaled_data_download&menu=historical
+into a useful json file that contains country, 
 '''
 import csv
 import json
 
-csvfile = open('temp.csv', 'r')
-jsonfile = open('temp.json', 'w')
+csvfile = open('Footprint_2012.csv', 'r')
+jsonfile = open('footprint.json', 'w')
 
-fieldnames = ("rainfall", "year", "month", "country_code")
+fieldnames = ("Country", "Population", "Cropland", "Grazing", "ForestProduct", "Carbon", "Fish", "Build up land", "Footprintcapita", "Footprintcountry")
 reader = csv.DictReader(csvfile, fieldnames)
 
 jsonfile.write('{\n	"points" : [\n')
