@@ -98,9 +98,6 @@ function prepareData(error, footprint, opinions) {
 		.key(function(d) { return d.code; })
 		.entries(countryopin);
 
-	// drawGraph(countryopinions, "Netherlands");
-	// barGraph(footcapita, "NLD");
-
 	makeMap(footcountry);
 
 	function makeMap(data) {
@@ -160,7 +157,6 @@ function prepareData(error, footprint, opinions) {
 		        		// d3.selectAll('#barchart').style("visibility", "visible");
 		        		// d3.selectAll('#scatterplot').style("visibility", "visible");
 		            	drawGraph(countryopinions, geography.id);
-		            	barGraph(footcapita, geography.id);
 		       	});  
 		    },     
 		});
@@ -282,10 +278,10 @@ function prepareData(error, footprint, opinions) {
 		  	.attr("id", function(d) { return "c" + d.key })
 		    .attr("r", "4.5")
 		    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
-		    .attr("cy", function(d) { return y(d.value); })
+		    .attr("cy", function(d) { console.log("yvalue ", d.value); return y(d.value); })
 		    .style("stroke", function(d) { return circlecolor(d.value); })
 		    .on("mouseover", function(d) {
-		    	d3.select(this).style("r", "5.5")
+		    	d3.select(this).style("r", "6.5")
 		    		.style("fill", function(d) { return circlecolor(d.value) })
 		    	div.style("visibility", "visible");
 				div.html(d.value)
@@ -320,7 +316,7 @@ function prepareData(error, footprint, opinions) {
 	// change color button on mouseover and update data    
 	var counbutton = d3.select("#country")
 		.on("click", function() {
-			console.log("countrycapita");
+			console.log(footcountry);
 			map.updateChoropleth(footcountry);
 		})
 		.on("mouseover", function() { 
@@ -345,10 +341,11 @@ function circlecolor(value) {
 	} else if (value < 50) {
 		return "#669900";
 	} else if (value < 75) {
+		console.log("value");
 		return "#8C7300";
-	} else if (value > 74) {
+	} else if (value < 100) {
 		return "#B24C00;"
-	} else if (value > 100) {
+	} else if (value > 101) {
 		return "#F20D00";
 	} else {
 		return "#F2FAF2";
