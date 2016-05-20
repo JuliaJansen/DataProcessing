@@ -157,8 +157,8 @@ function prepareData(error, footprint, opinions) {
 			},
 			done: function(datamap) {
 		        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-		        		d3.selectAll('#barchart').style("visibility", "visible");
-		        		d3.selectAll('#scatterplot').style("visibility", "visible");
+		        		// d3.selectAll('#barchart').style("visibility", "visible");
+		        		// d3.selectAll('#scatterplot').style("visibility", "visible");
 		            	drawGraph(countryopinions, geography.id);
 		            	barGraph(footcapita, geography.id);
 		       	});  
@@ -184,7 +184,7 @@ function prepareData(error, footprint, opinions) {
 
 		// set margins
 		var margin = {top: 15, right: 25, bottom: 35, left: 40},
-			width = 335,
+			width = 435,
 			height = 250;
 
 		// define x and y scale
@@ -218,7 +218,7 @@ function prepareData(error, footprint, opinions) {
 		// select dom element to attach svg
 		var svg = d3.select("#scatterplot").append("svg")
 			.attr("id", "opinions")
-			.attr("width", 400)
+			.attr("width", 500)
 			.attr("height", 300)
 		  .append("g")
 		  	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");

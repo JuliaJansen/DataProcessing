@@ -95,9 +95,11 @@ div.tooltip
 
 .footer
 {
+	position: relative;
 	font-size: 14px;
 	text-align: right;
 	font-style: italic;
+	right-align: -10px;
 }
 
 .hoverinfo
@@ -111,6 +113,12 @@ div.tooltip
 {
 	font: 13px helvetica;
 	font-weight: bold;
+}
+
+.indent
+{
+	margin-left: 150px;
+	margin-right: 150px;
 }
 
 .x.axis path 
@@ -149,10 +157,18 @@ div.tooltip
 	left: 10%;
 }
 
-#footertitle
+#tittitle
 {
 	font: 14px helvetica;
 	font-weight: bold;
+	text-align: center;
+}
+
+#tittext
+{
+	font: 11px helvetica;
+	text-indent: 100px;
+	right: 100px;
 	text-align: center;
 }
 
@@ -164,7 +180,8 @@ div.tooltip
 
 #scatterplot
 {
-	width: 400px;
+	position: relative;
+	width: 500px;
 	height: 300px;
     float:left; 
     left: 15%;
