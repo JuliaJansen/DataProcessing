@@ -88,7 +88,6 @@ function prepareData(error, footprint, opinions) {
 		countryopin.push({
 			"country": d.Country, 
 			"value": +d.Pollution, 
-			// "expvalue": +d.Exp_pollution, 
 			"date": +d.Year, 
 			"code": code
 		});
@@ -99,219 +98,236 @@ function prepareData(error, footprint, opinions) {
 		.key(function(d) { return d.code; })
 		.entries(countryopin);
 
-	var data = footcountry;
-
-	// drawGraph(countryopinions, "NLD");
-	barGraph(footcapita, "NLD");
-
-	// // define properties of map
-	// var map = new Datamap({
-	// 	element: document.getElementById('container1'),
-	// 	fills: {
-	// 		"8 - 12 gh": '#b30000',
-	//         "4.5 - 8 gh": '#e34a33',
-	//         "3.4 - 4.5 gh": '#fc8d59',
-	//         "1.7 - 3.3 gh": '#fdcc8a',
-	//         "0- 1.6 gh": '#fef0d9',
-	//         ">801 M gh": '#a63603',
-	//         "301 - 800 M gh": '#e6550d',
-	//         "106 - 300 M gh": '#fd8d3c',
-	//         "40 - 105 M gh": '#fdbe85',
-	//         "0 - 39 M gh": '#feedde',
-	//         UNKNOWN: '#e6e6e6',
-	//         defaultFill: '#e6e6e6'
-	//     },
-	//     data: data,
-	//     geographyConfig: {
-
-	//     	// show info at mouseover event in tooltip
-	//     	popupTemplate: function(geo, data) { 
-	//     		if (data.footprint > 0) {
-	//     			if (data == footcapita) {
-	//     				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
-	// 	                    ':<br>' + data.footprint,
-	// 	                    'gh/capita',
-	// 	                    '</strong></div>'].join('');
-	//     			} else {
-	//     				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
-	// 	                    ':<br>' + data.footprint,
-	// 	                    'M gh',
-	// 	                    '</strong></div>'].join('');
-	//  				}
-	//             } else {
-	//             	return ['<div class="hoverinfo"><strong>', 'no data of ' +
-	//             		geo.properties.name,
-	//             		'</strong></div>'].join('');
-	//             }
-	//     	},
-
-	//     	// change fillcolors of countries to highlight on mouseover
-	//         popupOnHover: true, 
-	//         highlightOnHover: true,
-	//         highlightFillColor: '#004d4d', 
-	//         highlightOpacity: 0.8,
-	//         highlightBorderColor: '#f0f9e8',
-	//         highlightBorderWidth: 2.8,
-	//         highlightBorderOpacity: 0.5
-	// 	}        
-	// });
-
-	// // Draw a legend for this map
-	// map.legend();
-
-	// // force data to update when menu is changed    
-	// var capita = d3.selectAll("#capita")
-	// 	.on("click", function() {
-	// 		var data = footcapita;
-	// 		map.updateChoropleth(data);
-	// 	});
-
-	// var countrybutton = d3.selectAll("#country")
-	// 	.on("click", function() {
-	// 		var data = footcountry;
-	// 		map.updateChoropleth(data);
-	// 	});
+	// drawGraph(countryopinions, "Netherlands");
+	// barGraph(footcapita, "NLD");
 
 
-	// function drawGraph(alldata, code) {
+		// define properties of map
+		var map = new Datamap({
+			element: document.getElementById('container1'),
+			fills: {
+				"8 - 12 gh": '#b30000',
+		        "4.5 - 8 gh": '#e34a33',
+		        "3.4 - 4.5 gh": '#fc8d59',
+		        "1.7 - 3.3 gh": '#fdcc8a',
+		        "0- 1.6 gh": '#fef0d9',
+		        ">801 M gh": '#a63603',
+		        "301 - 800 M gh": '#e6550d',
+		        "106 - 300 M gh": '#fd8d3c',
+		        "40 - 105 M gh": '#fdbe85',
+		        "0 - 39 M gh": '#feedde',
+		        UNKNOWN: '#e6e6e6',
+		        defaultFill: '#e6e6e6'
+		    },
+		    data: footcountry,
+		    geographyConfig: {
 
-	// 	// reformat data for particular graph
-	// 	graphdata = [];
+		    	// show info at mouseover event in tooltip
+		    	popupTemplate: function(geo, data) { 
+		    		if (data.footprint > 0) {
+		    			if (data == footcapita) {
+		    				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
+			                    ':<br>' + data.footprint,
+			                    'gh/capita',
+			                    '</strong></div>'].join('');
+		    			} else {
+		    				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
+			                    ':<br>' + data.footprint,
+			                    'M gh',
+			                    '</strong></div>'].join('');
+		 				}
+		            } else {
+		            	return ['<div class="hoverinfo"><strong>', 'no data of ' +
+		            		geo.properties.name,
+		            		'</strong></div>'].join('');
+		            }
+		    	},
 
-	// 	alldata.forEach(function(d) {
-	// 		if (d.key == code) { 
-	// 			var c = d.values;
-	// 			c.forEach(function(b) {
-	// 				graphdata.push({"date": b.date, "value": b.value, "country": b.country});
-	// 			})
-	// 		}
-	// 	})
+		    	// change fillcolors of countries to highlight on mouseover
+		        popupOnHover: true, 
+		        highlightOnHover: true,
+		        highlightFillColor: '#004d4d', 
+		        highlightOpacity: 0.8,
+		        highlightBorderColor: '#f0f9e8',
+		        highlightBorderWidth: 2.8,
+		        highlightBorderOpacity: 0.5
+			},
+			done: function(datamap) {
+		        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+		        		d3.selectAll('#barchart').style("visibility", "visible");
+		        		d3.selectAll('#scatterplot').style("visibility", "visible");
+		            	drawGraph(countryopinions, geography.id);
+		            	barGraph(footcapita, geography.id);
+		       	});  
+		    },     
+		});
+	
+	// Draw a legend for this map
+	map.legend();
 
-	// 	// set margins
-	// 	var margin = {top: 30, right: 30, bottom: 30, left: 50},
-	// 		width = 400,
-	// 		height = 300;
+	function drawGraph(alldata, code) {
 
-	// 	// define x and y scale
-	// 	var x = d3.scale.linear()
-	// 		.range([0, width]);
+		// reformat data for particular graph
+		graphdata = [];
 
-	// 	var y = d3.scale.linear()
-	// 		.range([height, 0]);
+		alldata.forEach(function(d) {
+			if (d.key == code) { 
+				var e = d.values;
+				e.forEach(function(b) {
+					graphdata.push({"date": b.date, "value": b.value, "country": b.country});
+				})
+			}
+		});
 
-	// 	// define axes
-	// 	var xAxis = d3.svg.axis()
-	// 		.scale(x)
-	// 		.orient("bottom");
+		// set margins
+		var margin = {top: 15, right: 25, bottom: 35, left: 40},
+			width = 335,
+			height = 250;
 
-	// 	var yAxis = d3.svg.axis()
-	// 		.scale(y)
-	// 		.orient("left");
+		// define x and y scale
+		var x = d3.scale.ordinal()
+			.rangeRoundBands([0, width], 1);
 
-	// 	// remove old tooltip
-	// 	d3.select("#tipsy").remove();
+		var y = d3.scale.linear()
+			.range([height, 0]);
 
-	// 	// make tooltip
-	// 	var div = d3.select("#scatterplot").append("div")	
-	// 		.attr("class", "tooltip")		
-	// 		.attr("id", "tipsy")		
-	// 		.style("visibility", "hidden");
+		// define axes
+		var xAxis = d3.svg.axis()
+			.scale(x)
+			.orient("bottom");
 
-	// 	// remove old svg to redraw
-	// 	d3.select("#opinions").remove();
+		var yAxis = d3.svg.axis()
+			.scale(y)
+			.orient("left");
 
-	// 	// select dom element to attach svg
-	// 	var svg = d3.select("#scatterplot").append("svg")
-	// 		.attr("id", "opinions")
-	// 		.attr("width", 400)
-	// 		.attr("height", 300)
-	// 	  .append("g")
-	// 	  	.attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+		// remove old tooltip
+		d3.select("#tipsy").remove();
 
-	// 	x.domain(d3.extent(graphdata, function(d) { return d.date; }));
-	// 	y.domain([
-	// 	    d3.min(alldata, function(d) { return d3.min(d.values, function(c) { return c.value }); }),
-	// 	    d3.max(alldata, function(d) { return d3.max(d.values, function(c) { return c.value }); })
-	// 	]);
+		// make tooltip
+		var div = d3.select("#scatterplot").append("div")	
+			.attr("class", "tooltip")		
+			.attr("id", "tipsy")		
+			.style("visibility", "hidden");
 
-	// 	// add X axis
-	// 	svg.append("g")
-	// 		.attr("class", "x axis")
-	// 		.attr("transform", "translate(0," + height + ")")
-	// 		.call(xAxis);
+		// remove old svg to redraw
+		d3.select("#opinions").remove();
 
-	// 	// add y axis
-	// 	svg.append("g")
-	// 		.attr("class", "y axis")
-	// 		.call(yAxis)
-	// 	  .append("text")
-	// 		.attr("transform", "rotate(-90)")
-	// 		.attr("y", -40)
-	// 		.attr("dy", ".71em")
-	// 		.style("text-anchor", "end")
-	// 		.text("Pollution Index");
+		// select dom element to attach svg
+		var svg = d3.select("#scatterplot").append("svg")
+			.attr("id", "opinions")
+			.attr("width", 400)
+			.attr("height", 300)
+		  .append("g")
+		  	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	// 	// legend = svg.selectAll('.legend')
-	// //       	.data(country);
+		// define domain
+		x.domain([2012, 2013, 2014, 2015, 2016])
+		y.domain([
+		    d3.min(alldata, function(d) { return d3.min(d.values, function(c) { return c.value }); }),
+		    d3.max(alldata, function(d) { return d3.max(d.values, function(c) { return c.value }); })
+		]);
 
-	//  //    var legendEnter = legend
-	//  //        .enter()
-	//  //        .append('g')
-	//  //        .attr('class', 'legend')
-	//  //        .attr('id', function(d){ return code; });
+		// add X axis
+		svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," + height + ")")
+			.call(xAxis)
+		  .append("text")
+			.attr("x", 300)
+			.attr("y", 20)
+			.attr("dy", ".71em")
+			.style("text-anchor", "start")
+			.text("Year");
 
-	// 	// //add the legend text
-	//  //    legendEnter.append('text')
-	//  //        .attr('cx', width - 20)
-	//  //        .attr('cy', height - 50)
-	//  //        .text(function(d){ return "Pollution Index is based on the opinions of the population"; });
+		// add y axis
+		svg.append("g")
+			.attr("class", "y axis")
+			.call(yAxis)
+		  .append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", -35)
+			.attr("dy", ".71em")
+			.style("text-anchor", "end")
+			.text("Pollution Index");
 
-	// 	// append a g for the country
-	// 	var country = svg.selectAll(".country")
-	// 	    .data(graphdata)
-	// 	  .enter().append("g")
-	// 	    .attr("class", "country");
+		legend = svg.selectAll('.graphtitle')
+	      	.data(graphdata);
 
-	// 	// Add the scatterplot
-	// 	country.selectAll("circle")
-	// 		.data(graphdata)
-	// 	  .enter().append("circle")
-	// 		.attr("class", "circle")
-	// 	  	.attr("id", function(d) { return "c"+ d.key })
-	// 	    .attr("r", "5.5")
-	// 	    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
-	// 	    .attr("cy", function(d) { return y(d.value); })
-	// 	    .style("stroke", "#194d33");
+	    var legendEnter = legend
+	        .enter()
+	        .append('g')
+	        .attr('class', 'legend')
+	        .attr('id', function(d){ return code; });
 
-	// 	// draw legend
-	// 	// d3.legend;
-	// }
+		//add the legend text
+	    legendEnter.append('text')
+	        .attr('x', width - 110)
+	        .attr('y', height - 230)
+	        .text(function(d){ name = d.country; return name.toUpperCase(); });
+
+		// append a g for the country
+		var country = svg.selectAll(".country")
+		    .data(graphdata)
+		  .enter().append("g")
+		    .attr("class", "country");
+
+		// Add the scatterplot
+		country.selectAll("circle")
+			.data(graphdata)
+		  .enter().append("circle")
+			.attr("class", "circle")
+		  	.attr("id", function(d) { return "c" + d.key })
+		    .attr("r", "4.5")
+		    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
+		    .attr("cy", function(d) { return y(d.value); })
+		    .style("stroke", function(d) { return circlecolor(d.value); })
+		    .on("mouseover", function(d) {
+		    	d3.select(this).style("r", "5.5")
+		    		.style("fill", function(d) { return circlecolor(d.value) })
+		    	div.style("visibility", "visible");
+				div.html(d.value)
+					.style("left", (d3.event.pageX) + "px")		
+                	.style("top", d3.event.pageY - 40 + "px");
+		    })
+		    .on("mouseout", function(d) {
+		    	d3.select(this).style("r", "4.5")
+		    		.style("fill", "#f2f2f2");
+		    });
+
+		// draw legend
+		// d3.legend;
+	}
 
 	function barGraph(footdata, code) {
+		
+		console.log("code = ", code);
+
 		// reformat data for particular graph
-		var bardata = {
-			"forest": footdata[code].forestproduct, 
-			"fish": footdata[code].fish, 
-			"cropland": footdata[code].cropland, 
-			"buildup": footdata[code].buildup,
-			"carbon": footdata[code].carbon,
-			"grazing": footdata[code].grazing
-		};
+		var bardata = [
+			{"forest": givevalue(footdata[code].forestproduct)}, 
+			{"fish": givevalue(footdata[code].fish)}, 
+			{"cropland": givevalue(footdata[code].cropland)}, 
+			{"buildup": givevalue(footdata[code].buildup)},
+			{"carbon": givevalue(footdata[code].carbon)},
+			{"grazing": givevalue(footdata[code].grazing)}
+		];
 
-		// margins 
-		var margin = {top: 20, right: 10, bottom: 30, left: 10};
+		console.log("bardata = ", bardata);
 
-		// width of chart and height of bars
-		var width = 600, 
-			height = 280,
+		// set margins, width and height
+		var margin = {top: 15, right: 25, bottom: 35, left: 40},
+			width = 335,
+			height = 250,
 			barwidth = 50;
 
 		// define how to scale the bars
-		var x = d3.scale.ordinal()
-			.rangeRoundBands([0, width], .1);
+		var x = d3.scale.linear()
+			.domain(bardata)
+			.range([0, bardata.length * barwidth]); //RoundBands([0, width],1);
 
 		// define scale of y-ax
 		var y = d3.scale.linear()
+			.domain(bardata)
 			.range([height, 0]);
 
 		// x-axis
@@ -331,63 +347,22 @@ function prepareData(error, footprint, opinions) {
 			.style("visibility", "hidden");
 
 		// select chart
-		var chart = d3.select("#barchart").append("svg")
+		var chart = d3.select("#barchart")
 			.attr("class", "chart")
 			.attr("position", "center")
-		    .attr("width", width) 
-		    .attr("height", height)
+		    .attr("width", width + margin.left) 
+		    .attr("height", height + margin.top)
 		  .append("g")
-			.attr("transform", "translate(0,0)");
-
-		// add a g element for each data point
-		var bar = chart.selectAll("g")
-			.data(bardata)
-		  .enter().append("rect")
-			.attr("y", function(d, i) { console.log("hiero?"); return y(d.value) })
-			.attr("x", function(d, i) { console.log(i); return i * barwidth;  })
-	  		.attr("width", barwidth - 10) // function(d) { return x(0.01 * d.percentage) })
-			.attr("height", function(d) { return height - y(d.value) - margin.top });
-		
-		// // add a blue bar for each data point
-		// bar.selectAll("rect")
-		// 	.attr("y", function(d, i) { console.log("hiero?"); return y(d.value) })
-		// 	.attr("x", function(d, i) { console.log(i); return i * barwidth;  })
-	 //  		.attr("width", barwidth - 10) // function(d) { return x(0.01 * d.percentage) })
-		// 	.attr("height", function(d) { return height - y(d.value) - margin.top });
-			// .on("mouseover", function(d) { 
-			// 		// tooltip should appear at mouse position
-			// 		d3.select(this).style("fill",  "#e68a00");
-			// 		div.style("visibility", "visible");
-			// 		var num = 1 * d.value;
-			// 		div.html(num.toFixed(2) + "gh/capita")
-			// 		   .style("height", function(d) { 
-			// 		   		if (country.search(" ") > 0) {
-			// 		   			return "45px";
-			// 		   		}
-			// 		   	})
-			// 		   .style("left", (d3.event.pageX) + "px")
-			// 		   .style("top", (d3.event.pageY - 28) + "px");
-			// 	})
-			// .on("mouseout", function(d) { d3.select(this).style("fill", "#24435c") });
-
-		// // append label of ecological footprint specified
-	 //    bar.append("text")
-	 //    	.attr("id", "specified")
-	 //    	.attr("y", 5)
-	 //    	.attr("x", -height + 8)
-	 //    	.attr("dy", ".75em")
-	 //    	.attr("transform", "rotate(-90)")
-	 //    	.text(function(d) { return d.key })
-	 //    	.style("text-anchor", "start" );
+		  	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		// add x axis
 		chart.append("g")
 		    .attr("class", "x axis")
-		    .attr("transform", "translate(0," + height + ")")
+		    .attr("transform", "translate(0," + (height - margin.top) + ")")
 		    .call(xAxis)
 		  .append("text")
-			.attr("y", 0)
-			.attr("x", 0)
+			.attr("y", 8)
+			.attr("x", 10)
 			.attr("dy", ".71em")
 			.style("text-anchor", "start");
 
@@ -396,15 +371,89 @@ function prepareData(error, footprint, opinions) {
 	  		.attr("class", "y axis")
 	  		.call(yAxis)
 	  	  .append("text")
-			.attr("y", 0)
-			.attr("x", 0)
+			.attr("y", -10)
+			.attr("x", -55)
 			.style("font-weight", "bold")
 			.attr("dy", ".71em")
 			.style("text-anchor", "start")
 			.text("Global Hectares per Capita");
+
+		// add a g element for each data point
+		var bar = chart.selectAll("g")
+			.data(bardata)
+		  .enter().append("g")
+		  	.attr("transform", function(d, i) {
+		  		return "translate(" + (i * barwidth) + ",0)"
+		  	});
+
+		bar.append('rect')
+			.attr("y", function(d) { return y(d.value) })
+			.attr("x", function(d) { return i * barwidth; })
+			.attr("width", barwidth - 10)
+			.attr("height", function(d) { return height - y(d.value); });
+
+		// append label of ecological footprint specified
+	    bar.append("text")
+	    	.attr("id", "specified")
+	    	.attr("y", 5)
+	    	.attr("x", -height + 8)
+	    	.attr("dy", ".75em")
+	    	.attr("transform", "rotate(-90)")
+	    	.text(function(d) { return d.key })
+	    	.style("text-anchor", "start" );
 	}
+
+	// change color button on mouseover and update data  
+	var capbutton = d3.select("#capita")
+		.on("click", function() {
+			console.log("capita");
+			map.updateChoropleth(footcapita);
+		})
+		.on("mouseover", function() { 
+			// tooltip should appear at mouse position
+			d3.select(this).style("background",  "#cccccc")
+				.style("color", "white");
+		})
+		.on("mouseout", function() {
+			d3.select(this).style("background",  "#f2f2f2")
+				.style("color", "black");
+		});
+
+	// change color button on mouseover and update data    
+	var counbutton = d3.select("#country")
+		.on("click", function() {
+			console.log("countrycapita");
+			map.updateChoropleth(footcountry);
+		})
+		.on("mouseover", function() { 
+			// tooltip should appear at mouse position
+			d3.select(this).style("background",  "#cccccc")
+				.style("color", "white");
+		})
+		.on("mouseout", function() {
+			d3.select(this).style("background",  "#f2f2f2")
+				.style("color", "black");
+		});
 }
 
+/* 
+ * Returns color for pollution index value.
+ */
+function circlecolor(value) {
+	if (value < 25) {
+		return "#26D900";
+	} else if (value < 50) {
+		return "#669900";
+	} else if (value < 75) {
+		return "#8C7300";
+	} else if (value > 74) {
+		return "#B24C00;"
+	} else if (value > 100) {
+		return "#F20D00";
+	} else {
+		return "#F2FAF2";
+	}
+}
 
 /* 
  * Function returns value category as string.
@@ -443,5 +492,14 @@ function countryvalue(footprint)
 		return "0 - 39 M gh";
 	} else {
 		return "UNKNOWN";
+	}
+}
+
+function givevalue(value) {
+	if (isNaN(value)) {
+		console.log("in NaN value", value);
+		return 0;
+	} else {
+		return value;
 	}
 }

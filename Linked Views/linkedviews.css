@@ -6,6 +6,10 @@
 /*
  * Styles for Linked Views webvisual
  */
+body
+{
+	background-color: #ffffff;
+}
 
 div
 {
@@ -18,14 +22,15 @@ div.tooltip
 { 
     position: absolute;     
     text-align: center;     
-    width: 73px;          
-    height: 30px;         
+    width: 40px;          
+    height: 14px;         
     padding: 2px;       
-    font: 13px sans-serif; 
-    font-weight: bold;   
-    background: #cccc99; 
-    border-width: 2px;    
-    border-radius: 1px;     
+    font: 11px sans-serif; 
+    font-weight: bold;
+    background: #c8daea; 
+    border-color: #91b6d4;
+    border-width: 3px;    
+    border-radius: 3px;     
     pointer-events: none;     
 }
 
@@ -39,22 +44,24 @@ div.tooltip
 .axis path
 {
 	fill: none;
-  	stroke: #404040;
+  	stroke: #bfbfbf;
   	shape-rendering: crispEdges;
 }
 
 .axis line 
 {
 	fill: none;
-	stroke: #404040;
+	stroke: #bfbfbf;
 	shape-rendering: crispEdges;
 	visibility: hidden;
 }
 
 .button
 {
+	font: helvetica 10px;
+	color: black;
 	background: #f2f2f2;
-	width: 130px;
+	width: 110px;
 	height: 20px;
 	border-radius: 4px;
 }
@@ -63,7 +70,7 @@ div.tooltip
 .chart rect 
 {
   	fill: #24435c;
-  	/*border-width: 2px;*/
+  	border-width: 2px;
 }
 
 .circle
@@ -72,23 +79,16 @@ div.tooltip
 	stroke-width: 2.5px;
 }
 
-/*.datamaps
-{
-	position: fixed;
-	top: 50%;
-	left: 50%;
-}
-*/
 .datamaps-legend
 {
 	position:relative;
-	left: -20;
-	width: 420px;
+	width: 1200px;
 }
 
 .header
 {
-	background: black;
+	font-family: helvetica;
+	font-size: 32px;
 	border-radius: 3px;
 	border-color: #4d4d4d;
 }
@@ -107,6 +107,12 @@ div.tooltip
 	border-radius: 2px;
 }
 
+.graphtitle
+{
+	font: 13px helvetica;
+	font-weight: bold;
+}
+
 .x.axis path 
 {
   display: visible;
@@ -115,6 +121,7 @@ div.tooltip
 #barchart
 {
 	border: 1px solid green;
+	float: right;
     overflow: hidden;
 }
 
@@ -128,15 +135,20 @@ div.tooltip
 #container1
 {
 	position:relative;
-	top: 15%;
-	left: 15%;
+	left: 10%;
 }
 
-#container2
+#footertitle
 {
-	width: 1200px;
-    border: 1px solid black;
-    overflow: hidden;
+	font: 14px helvetica;
+	font-weight: bold;
+	text-align: center;
+}
+
+#info
+{
+	font: 13px helvetica;
+	text-align: left;
 }
 
 #scatterplot
@@ -144,7 +156,8 @@ div.tooltip
 	width: 400px;
 	height: 300px;
     float:left; 
-    border: 1px solid red;
+    left: 15%;
+    visibility: visible;
 }
 
 #source
@@ -159,7 +172,7 @@ div.tooltip
 
 #title
 {
-	font-size: 20px helvetica;
+	font: helvetica 32px;
 	font-weight: bold;
 	color: black;
 }
@@ -172,7 +185,7 @@ div.tooltip
   	font: 12px helvetica; 
   	width: 150px;   
   	height: 57px;
-  	background: #c8daea;  
+  	background: #ffffff;  
   	border: #b3b3b3; 
   	border-width: 1.5px;
   	opacity: 0.7;

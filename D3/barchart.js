@@ -88,6 +88,8 @@ window.onload = function() {
 		  .enter().append("g")
     		.attr("transform", function(d, i) { return "translate(" + i * barwidth + ", 0)"; });
 
+    	console.log("data ", data);
+    	
 		// add a blue bar for each data point
 		bar.append("rect")
 			.attr("y", function(d, i) { return y(0.01 * d.percentage) })
