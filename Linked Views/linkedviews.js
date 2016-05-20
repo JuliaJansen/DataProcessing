@@ -154,9 +154,7 @@ function prepareData(error, footprint, opinions) {
 			},
 			done: function(datamap) {
 		        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-		        		// d3.selectAll('#barchart').style("visibility", "visible");
-		        		// d3.selectAll('#scatterplot').style("visibility", "visible");
-		            	drawGraph(countryopinions, geography.id);
+		        		drawGraph(countryopinions, geography.id);
 		       	});  
 		    },     
 		});
@@ -279,7 +277,7 @@ function prepareData(error, footprint, opinions) {
 		    .attr("r", "4.5")
 		    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
 		    .attr("cy", function(d) { console.log("yvalue ", d.value); return y(d.value); })
-		    .style("stroke", function(d) { return circlecolor(d.value); })
+		    .style("stroke", function(d) { console.log("stroke", circlecolor(d.value)); return circlecolor(d.value); })
 		    .on("mouseover", function(d) {
 		    	d3.select(this).style("r", "6.5")
 		    		.style("fill", function(d) { return circlecolor(d.value) })
@@ -300,7 +298,6 @@ function prepareData(error, footprint, opinions) {
 	// change color button on mouseover and update data  
 	var capbutton = d3.select("#capita")
 		.on("click", function() {
-			console.log("capita");
 			map.updateChoropleth(footcapita);
 		})
 		.on("mouseover", function() { 
@@ -316,7 +313,6 @@ function prepareData(error, footprint, opinions) {
 	// change color button on mouseover and update data    
 	var counbutton = d3.select("#country")
 		.on("click", function() {
-			console.log(footcountry);
 			map.updateChoropleth(footcountry);
 		})
 		.on("mouseover", function() { 
@@ -341,11 +337,12 @@ function circlecolor(value) {
 	} else if (value < 50) {
 		return "#669900";
 	} else if (value < 75) {
-		console.log("value");
+		console.log("under 75");
 		return "#8C7300";
 	} else if (value < 100) {
+		console.log("under 100");
 		return "#B24C00;"
-	} else if (value > 101) {
+	} else if (value < 160) {
 		return "#F20D00";
 	} else {
 		return "#F2FAF2";
