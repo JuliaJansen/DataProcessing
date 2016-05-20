@@ -283,16 +283,13 @@ function prepareData(error, footprint, opinions) {
 		    		.style("fill", function(d) { return circlecolor(d.value) })
 		    	div.style("visibility", "visible");
 				div.html(d.value)
-					.style("left", (d3.event.pageX) + "px")		
-                	.style("top", d3.event.pageY - 40 + "px");
+					.style("left", x(d.date) + "px")		
+                	.style("top", d3.event.pageY - 520 + "px");
 		    })
 		    .on("mouseout", function(d) {
 		    	d3.select(this).style("r", "4.5")
 		    		.style("fill", "#f2f2f2");
 		    });
-
-		// draw legend
-		// d3.legend;
 	}
 
 	// change color button on mouseover and update data  
