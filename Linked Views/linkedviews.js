@@ -283,8 +283,8 @@ function prepareData(error, footprint, opinions) {
 		    		.style("fill", function(d) { return circlecolor(d.value) })
 		    	div.style("visibility", "visible");
 				div.html(d.value)
-					.style("left", x(d.date) + "px")		
-                	.style("top", d3.event.pageY - 520 + "px");
+					.style("left", (x(d.date) + 5) + "px")		
+                	.style("top", d3.event.pageY - 530 + "px");
 		    })
 		    .on("mouseout", function(d) {
 		    	d3.select(this).style("r", "4.5")
