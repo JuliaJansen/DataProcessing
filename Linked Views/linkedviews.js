@@ -155,6 +155,35 @@ function prepareData(error, footprint, opinions) {
 			done: function(datamap) {
 		        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 		        		drawGraph(countryopinions, geography.id);
+		        		// change color button on mouseover and update data  
+						var capbutton = d3.select("#capita")
+							.on("click", function() {
+								map.updateChoropleth(footcapita);
+							})
+							.on("mouseover", function() { 
+								// tooltip should appear at mouse position
+								d3.select(this).style("background",  "#cccccc")
+									.style("color", "white");
+							})
+							.on("mouseout", function() {
+								d3.select(this).style("background",  "#f2f2f2")
+									.style("color", "black");
+							});
+
+						// change color button on mouseover and update data    
+						var counbutton = d3.select("#country")
+							.on("click", function() {
+								map.updateChoropleth(footcountry);
+							})
+							.on("mouseover", function() { 
+								// tooltip should appear at mouse position
+								d3.select(this).style("background",  "#cccccc")
+									.style("color", "white");
+							})
+							.on("mouseout", function() {
+								d3.select(this).style("background",  "#f2f2f2")
+									.style("color", "black");
+							});
 		       	});  
 		    },     
 		});
@@ -275,9 +304,9 @@ function prepareData(error, footprint, opinions) {
 			.attr("class", "circle")
 		  	.attr("id", function(d) { return "c" + d.key })
 		    .attr("r", "4.5")
-		    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
-		    .attr("cy", function(d) { console.log("yvalue ", d.value); return y(d.value); })
-		    .style("stroke", function(d) { console.log("stroke", circlecolor(d.value)); return circlecolor(d.value); })
+		    .attr("cx", function(d) { return x(d.date); }) 
+		    .attr("cy", function(d) { return y(d.value); })
+		    .style("stroke", function(d) { return circlecolor(d.value); })
 		    .on("mouseover", function(d) {
 		    	d3.select(this).style("r", "6.5")
 		    		.style("fill", function(d) { return circlecolor(d.value) })
@@ -298,7 +327,6 @@ function prepareData(error, footprint, opinions) {
 			map.updateChoropleth(footcapita);
 		})
 		.on("mouseover", function() { 
-			// tooltip should appear at mouse position
 			d3.select(this).style("background",  "#cccccc")
 				.style("color", "white");
 		})
@@ -313,7 +341,6 @@ function prepareData(error, footprint, opinions) {
 			map.updateChoropleth(footcountry);
 		})
 		.on("mouseover", function() { 
-			// tooltip should appear at mouse position
 			d3.select(this).style("background",  "#cccccc")
 				.style("color", "white");
 		})
@@ -334,10 +361,8 @@ function circlecolor(value) {
 	} else if (value < 50) {
 		return "#669900";
 	} else if (value < 75) {
-		console.log("under 75");
 		return "#8C7300";
 	} else if (value < 100) {
-		console.log("under 100");
 		return "#B24C00;"
 	} else if (value < 160) {
 		return "#F20D00";
@@ -388,7 +413,6 @@ function countryvalue(footprint)
 
 function givevalue(value) {
 	if (isNaN(value)) {
-		console.log("in NaN value", value);
 		return 0;
 	} else {
 		return value;
