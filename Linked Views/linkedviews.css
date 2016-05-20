@@ -132,6 +132,17 @@ div.tooltip
 	left: 10;
 }
 */
+
+#capita
+{
+	pointer-events: all;
+}
+
+#country
+{
+	pointer-events: all;	
+}
+
 #container1
 {
 	position:relative;

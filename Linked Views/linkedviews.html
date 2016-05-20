@@ -22,24 +22,24 @@
 			</div>
 			<div id="container1" style="height: 400px; width: 960px"></div>
 			<p id="menu" class="menuchoice" style="color: #6c9dc6">S E L E C T
-				<button class="button" id="capita">footprint / capita</button>
-				<button class="button" id="country">footprint / country</button>
+				<button class="button" id="capita" onclick="makeMap(footcapita)">footprint / capita</button>
+				<button class="button" id="country" onclick="makeMap(footcountry)">footprint / country</button>
 			</p>
 				<script src="countrycodes.js"></script>
 				<script src="linkedviews.js"></script>
-<!-- 			<div id="container2" style="height: 300px; width: 1200px;"></div> -->
 				<div id="scatterplot"></div>
-				<div id="barchart"></div>
 
-			<div id="footer">
-				<p class="footer" id="sources">sourcesourcessources</p>
-				<p class="footer">Julia Jansen</p>
-			</div>
 			<div id="info">
 			<p id="footertitle">ECOLOGICAL FOOTPRINT PER CAPITA</p>
 
-			The Ecological Footprint per capita is a nation's total Ecological Footprint divided by the total population of the nation. To live within the means of our planet's resources, the world's Ecological Footprint would have to equal the available biocapacity per person on our planet, which is currently 1.7 global hectares. So if a nation's Ecological Footprint per capita is 6.8 global hectares, its citizens are demanding four times the resources and wastes that our planet can regenerate and absorb in the atmosphere. SOURCE:
-			http://www.footprintnetwork.org/ecological_footprint_nations/ecological_per_capita.html
+			The Ecological Footprint per capita is a nation's total Ecological Footprint divided by the total population of the nation. To live within the means of our planet's resources, the world's Ecological Footprint would have to equal the available biocapacity per person on our planet, which is currently 1.7 global hectares. So if a nation's Ecological Footprint per capita is 6.8 global hectares, its citizens are demanding four times the resources and wastes that our planet can regenerate and absorb in the atmosphere. 
+			</div>
+			<div id="footer">
+				<p class="footer"></p>
+					<text class="footer">S O U R C E S</text><br>
+					<a href="http://www.footprintnetwork.org/ecological_footprint_nations/ecological_per_capita.html">www.footprintnetwork.org</a><br>
+					<a href="http://www.numbeo.com/pollution/rankings_by_country.jsp">www.numbeo.com</a>
+				<p class="footer">Julia Jansen</p>
 			</div>
 		</div>
 	</body>
