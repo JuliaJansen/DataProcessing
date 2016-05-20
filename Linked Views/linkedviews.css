@@ -96,9 +96,9 @@ div.tooltip
 .footer
 {
 	position: relative;
-	font-size: 14px;
+	top: 100%;
+	font-size: 12px;
 	text-align: right;
-	font-style: italic;
 	right-align: -10px;
 }
 
@@ -154,7 +154,9 @@ div.tooltip
 #container1
 {
 	position:relative;
-	left: 10%;
+	left: 0%;
+	margin-left: 0;
+	float:left; 
 }
 
 #tittitle
@@ -181,10 +183,11 @@ div.tooltip
 #scatterplot
 {
 	position: relative;
-	width: 500px;
+	left: 0;
+	width: 400px;
 	height: 300px;
-    float:left; 
-    left: 15%;
+    float:right;
+    overflow: hidden; 
     visibility: visible;
 }
 
@@ -209,7 +212,7 @@ div.tooltip
 {
   	position: relative;
   	top: -150px;
-  	left: 50px;
+  	left: 35px;
   	font: 12px helvetica; 
   	width: 150px;   
   	height: 57px;
