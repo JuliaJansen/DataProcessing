@@ -13,6 +13,22 @@ div
 	text-align: center;
 }
 
+/* style tooltip */
+div.tooltip 
+{ 
+    position: absolute;     
+    text-align: center;     
+    width: 73px;          
+    height: 30px;         
+    padding: 2px;       
+    font: 13px sans-serif; 
+    font-weight: bold;   
+    background: #cccc99; 
+    border-width: 2px;    
+    border-radius: 1px;     
+    pointer-events: none;     
+}
+
 /* stylize axis */
 .axis text 
 {
@@ -43,21 +59,31 @@ div
 	border-radius: 4px;
 }
 
+/* bars */
+.chart rect 
+{
+  	fill: #24435c;
+  	/*border-width: 2px;*/
+}
+
 .circle
 {
-	fill: #ffffff;
-	stroke-width: 1.5px;
+	fill: #f2f2f2;
+	stroke-width: 2.5px;
 }
 
-.datamaps
+/*.datamaps
 {
-	position: absolute;
-	top: 20;
+	position: fixed;
+	top: 50%;
+	left: 50%;
 }
-
+*/
 .datamaps-legend
 {
-	width: 1200px;
+	position:relative;
+	left: -20;
+	width: 420px;
 }
 
 .header
@@ -86,11 +112,39 @@ div
   display: visible;
 }
 
-#opinions
+#barchart
+{
+	border: 1px solid green;
+    overflow: hidden;
+}
+
+/*#opinions
 {
 	position: absolute;
-	top: 80;
-	left: 800;
+	top: 400;
+	left: 10;
+}
+*/
+#container1
+{
+	position:relative;
+	top: 15%;
+	left: 15%;
+}
+
+#container2
+{
+	width: 1200px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+#scatterplot
+{
+	width: 400px;
+	height: 300px;
+    float:left; 
+    border: 1px solid red;
 }
 
 #source
@@ -112,8 +166,8 @@ div
 
 #menu
 {
-  	position: absolute;
-  	top: 20px;
+  	position: relative;
+  	top: -150px;
   	left: 50px;
   	font: 12px helvetica; 
   	width: 150px;   

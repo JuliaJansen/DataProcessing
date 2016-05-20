@@ -88,7 +88,7 @@ function prepareData(error, footprint, opinions) {
 		countryopin.push({
 			"country": d.Country, 
 			"value": +d.Pollution, 
-			"expvalue": +d.Exp_pollution, 
+			// "expvalue": +d.Exp_pollution, 
 			"date": +d.Year, 
 			"code": code
 		});
@@ -101,203 +101,308 @@ function prepareData(error, footprint, opinions) {
 
 	var data = footcountry;
 
-	colorMap(data);
-	drawGraph(countryopinions, "NLD");
+	// drawGraph(countryopinions, "NLD");
+	barGraph(footcapita, "NLD");
 
-	function colorMap(data) {
-		// define properties of map
-		var map = new Datamap({
-			element: document.getElementById('container1'),
-			fills: {
-				"8 - 12 gh": '#b30000',
-		        "4.5 - 8 gh": '#e34a33',
-		        "3.4 - 4.5 gh": '#fc8d59',
-		        "1.7 - 3.3 gh": '#fdcc8a',
-		        "0- 1.6 gh": '#fef0d9',
-		        ">801 M gh": '#a63603',
-		        "301 - 800 M gh": '#e6550d',
-		        "106 - 300 M gh": '#fd8d3c',
-		        "40 - 105 M gh": '#fdbe85',
-		        "0 - 39 M gh": '#feedde',
-		        UNKNOWN: '#e6e6e6',
-		        defaultFill: '#e6e6e6'
-		    },
-		    data: data,
-		    geographyConfig: {
+	// // define properties of map
+	// var map = new Datamap({
+	// 	element: document.getElementById('container1'),
+	// 	fills: {
+	// 		"8 - 12 gh": '#b30000',
+	//         "4.5 - 8 gh": '#e34a33',
+	//         "3.4 - 4.5 gh": '#fc8d59',
+	//         "1.7 - 3.3 gh": '#fdcc8a',
+	//         "0- 1.6 gh": '#fef0d9',
+	//         ">801 M gh": '#a63603',
+	//         "301 - 800 M gh": '#e6550d',
+	//         "106 - 300 M gh": '#fd8d3c',
+	//         "40 - 105 M gh": '#fdbe85',
+	//         "0 - 39 M gh": '#feedde',
+	//         UNKNOWN: '#e6e6e6',
+	//         defaultFill: '#e6e6e6'
+	//     },
+	//     data: data,
+	//     geographyConfig: {
 
-		    	// show info at mouseover event in tooltip
-		    	popupTemplate: function(geo, data) { 
-		    		if (data.footprint > 0) {
-		    			if (data == footcapita) {
-		    				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
-			                    ':<br>' + data.footprint,
-			                    'gh/capita',
-			                    '</strong></div>'].join('');
-		    			} else {
-		    				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
-			                    ':<br>' + data.footprint,
-			                    'M gh',
-			                    '</strong></div>'].join('');
-		 				}
-		            } else {
-		            	return ['<div class="hoverinfo"><strong>', 'no data of ' +
-		            		geo.properties.name,
-		            		'</strong></div>'].join('');
-		            }
-		    	},
+	//     	// show info at mouseover event in tooltip
+	//     	popupTemplate: function(geo, data) { 
+	//     		if (data.footprint > 0) {
+	//     			if (data == footcapita) {
+	//     				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
+	// 	                    ':<br>' + data.footprint,
+	// 	                    'gh/capita',
+	// 	                    '</strong></div>'].join('');
+	//     			} else {
+	//     				return ['<div class="hoverinfo"><strong>' + geo.properties.name,
+	// 	                    ':<br>' + data.footprint,
+	// 	                    'M gh',
+	// 	                    '</strong></div>'].join('');
+	//  				}
+	//             } else {
+	//             	return ['<div class="hoverinfo"><strong>', 'no data of ' +
+	//             		geo.properties.name,
+	//             		'</strong></div>'].join('');
+	//             }
+	//     	},
 
-		    	// change fillcolors of countries to highlight on mouseover
-		        popupOnHover: true, 
-		        highlightOnHover: true,
-		        highlightFillColor: '#004d4d', 
-		        highlightOpacity: 0.8,
-		        highlightBorderColor: '#f0f9e8',
-		        highlightBorderWidth: 2.8,
-		        highlightBorderOpacity: 0.5
-			}        
-		});
+	//     	// change fillcolors of countries to highlight on mouseover
+	//         popupOnHover: true, 
+	//         highlightOnHover: true,
+	//         highlightFillColor: '#004d4d', 
+	//         highlightOpacity: 0.8,
+	//         highlightBorderColor: '#f0f9e8',
+	//         highlightBorderWidth: 2.8,
+	//         highlightBorderOpacity: 0.5
+	// 	}        
+	// });
 
-		// Draw a legend for this map
-		map.legend();
+	// // Draw a legend for this map
+	// map.legend();
 
-		// force data to update when menu is changed    
-		var capita = d3.selectAll("#capita")
-			.on("click", function() {
-				var data = footcapita;
-				recolorMap(map, data);
-			});
+	// // force data to update when menu is changed    
+	// var capita = d3.selectAll("#capita")
+	// 	.on("click", function() {
+	// 		var data = footcapita;
+	// 		map.updateChoropleth(data);
+	// 	});
 
-		var countrybutton = d3.selectAll("#country")
-			.on("click", function() {
-				var data = footcountry;
-				recolorMap(map, data);
-			});
-	
+	// var countrybutton = d3.selectAll("#country")
+	// 	.on("click", function() {
+	// 		var data = footcountry;
+	// 		map.updateChoropleth(data);
+	// 	});
 
-		function recolorMap(map, data) {
-			d3.select(map).remove();
-			colorMap(data);
-		}
-	}
 
-	function drawGraph(data, code) {
-		data.forEach(function(d) {
-			if (d.key == code) { 
-				var c = d.values;
-				c.forEach(function(b) {
-					console.log(b.date);
-				})
-			}
-		})
+	// function drawGraph(alldata, code) {
 
-		// console.log(data);
-		// console.log(data[code]);
-		// console.log("data.date", data.date);
-		// console.log("data.key", data.key);
-		// console.log("data.date", data.date);
-		// console.log("data.date", data.date);
+	// 	// reformat data for particular graph
+	// 	graphdata = [];
 
-		// set margins
-		var margin = {top: 30, right: 30, bottom: 30, left: 50},
-			width = 400,
-			height = 300;
+	// 	alldata.forEach(function(d) {
+	// 		if (d.key == code) { 
+	// 			var c = d.values;
+	// 			c.forEach(function(b) {
+	// 				graphdata.push({"date": b.date, "value": b.value, "country": b.country});
+	// 			})
+	// 		}
+	// 	})
 
-		// define x and y scale
-		var x = d3.scale.linear()
-			.range([0, width - margin.right]);
+	// 	// set margins
+	// 	var margin = {top: 30, right: 30, bottom: 30, left: 50},
+	// 		width = 400,
+	// 		height = 300;
 
+	// 	// define x and y scale
+	// 	var x = d3.scale.linear()
+	// 		.range([0, width]);
+
+	// 	var y = d3.scale.linear()
+	// 		.range([height, 0]);
+
+	// 	// define axes
+	// 	var xAxis = d3.svg.axis()
+	// 		.scale(x)
+	// 		.orient("bottom");
+
+	// 	var yAxis = d3.svg.axis()
+	// 		.scale(y)
+	// 		.orient("left");
+
+	// 	// remove old tooltip
+	// 	d3.select("#tipsy").remove();
+
+	// 	// make tooltip
+	// 	var div = d3.select("#scatterplot").append("div")	
+	// 		.attr("class", "tooltip")		
+	// 		.attr("id", "tipsy")		
+	// 		.style("visibility", "hidden");
+
+	// 	// remove old svg to redraw
+	// 	d3.select("#opinions").remove();
+
+	// 	// select dom element to attach svg
+	// 	var svg = d3.select("#scatterplot").append("svg")
+	// 		.attr("id", "opinions")
+	// 		.attr("width", 400)
+	// 		.attr("height", 300)
+	// 	  .append("g")
+	// 	  	.attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+
+	// 	x.domain(d3.extent(graphdata, function(d) { return d.date; }));
+	// 	y.domain([
+	// 	    d3.min(alldata, function(d) { return d3.min(d.values, function(c) { return c.value }); }),
+	// 	    d3.max(alldata, function(d) { return d3.max(d.values, function(c) { return c.value }); })
+	// 	]);
+
+	// 	// add X axis
+	// 	svg.append("g")
+	// 		.attr("class", "x axis")
+	// 		.attr("transform", "translate(0," + height + ")")
+	// 		.call(xAxis);
+
+	// 	// add y axis
+	// 	svg.append("g")
+	// 		.attr("class", "y axis")
+	// 		.call(yAxis)
+	// 	  .append("text")
+	// 		.attr("transform", "rotate(-90)")
+	// 		.attr("y", -40)
+	// 		.attr("dy", ".71em")
+	// 		.style("text-anchor", "end")
+	// 		.text("Pollution Index");
+
+	// 	// legend = svg.selectAll('.legend')
+	// //       	.data(country);
+
+	//  //    var legendEnter = legend
+	//  //        .enter()
+	//  //        .append('g')
+	//  //        .attr('class', 'legend')
+	//  //        .attr('id', function(d){ return code; });
+
+	// 	// //add the legend text
+	//  //    legendEnter.append('text')
+	//  //        .attr('cx', width - 20)
+	//  //        .attr('cy', height - 50)
+	//  //        .text(function(d){ return "Pollution Index is based on the opinions of the population"; });
+
+	// 	// append a g for the country
+	// 	var country = svg.selectAll(".country")
+	// 	    .data(graphdata)
+	// 	  .enter().append("g")
+	// 	    .attr("class", "country");
+
+	// 	// Add the scatterplot
+	// 	country.selectAll("circle")
+	// 		.data(graphdata)
+	// 	  .enter().append("circle")
+	// 		.attr("class", "circle")
+	// 	  	.attr("id", function(d) { return "c"+ d.key })
+	// 	    .attr("r", "5.5")
+	// 	    .attr("cx", function(d) { return x(d.date); }) //console.log("yes", x(d.date)); 
+	// 	    .attr("cy", function(d) { return y(d.value); })
+	// 	    .style("stroke", "#194d33");
+
+	// 	// draw legend
+	// 	// d3.legend;
+	// }
+
+	function barGraph(footdata, code) {
+		// reformat data for particular graph
+		var bardata = {
+			"forest": footdata[code].forestproduct, 
+			"fish": footdata[code].fish, 
+			"cropland": footdata[code].cropland, 
+			"buildup": footdata[code].buildup,
+			"carbon": footdata[code].carbon,
+			"grazing": footdata[code].grazing
+		};
+
+		// margins 
+		var margin = {top: 20, right: 10, bottom: 30, left: 10};
+
+		// width of chart and height of bars
+		var width = 600, 
+			height = 280,
+			barwidth = 50;
+
+		// define how to scale the bars
+		var x = d3.scale.ordinal()
+			.rangeRoundBands([0, width], .1);
+
+		// define scale of y-ax
 		var y = d3.scale.linear()
 			.range([height, 0]);
 
-		// define axes
+		// x-axis
 		var xAxis = d3.svg.axis()
 			.scale(x)
-			.orient("bottom");
+		 	.orient("top")
 
+		// Y-axis
 		var yAxis = d3.svg.axis()
 			.scale(y)
-			.orient("left");
-
-		// remove old tooltip
-		d3.select("#tipsy").remove();
+			.orient("left")
+			.ticks(0.2, "gh");
 
 		// make tooltip
-		var div = d3.select("#container1").append("div")	
-			.attr("class", "tooltip")		
-			.attr("id", "tipsy")		
+		var div = d3.select("#barchart").append("div")	
+			.attr("class", "tooltip")				
 			.style("visibility", "hidden");
 
-		// remove old svg to redraw
-		d3.select("#opinions").remove();
-
-		// select dom element to attach svg
-		var svg = d3.select("#container1").append("svg")
-			.attr("id", "opinions")
-			.attr("width", 400)
-			.attr("height", 300)
+		// select chart
+		var chart = d3.select("#barchart").append("svg")
+			.attr("class", "chart")
+			.attr("position", "center")
+		    .attr("width", width) 
+		    .attr("height", height)
 		  .append("g")
-		  	.attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+			.attr("transform", "translate(0,0)");
 
-		x.domain(d3.extent(data, function(d) { return 2015; }));
-		y.domain([
-		    d3.min(data, function(d) { return d3.min(d.values, function(c) { return c.value; }); }),
-		    d3.max(data, function(d) { return d3.max(d.values, function(c) { return c.value; }); })
-		]);
+		// add a g element for each data point
+		var bar = chart.selectAll("g")
+			.data(bardata)
+		  .enter().append("rect")
+			.attr("y", function(d, i) { console.log("hiero?"); return y(d.value) })
+			.attr("x", function(d, i) { console.log(i); return i * barwidth;  })
+	  		.attr("width", barwidth - 10) // function(d) { return x(0.01 * d.percentage) })
+			.attr("height", function(d) { return height - y(d.value) - margin.top });
+		
+		// // add a blue bar for each data point
+		// bar.selectAll("rect")
+		// 	.attr("y", function(d, i) { console.log("hiero?"); return y(d.value) })
+		// 	.attr("x", function(d, i) { console.log(i); return i * barwidth;  })
+	 //  		.attr("width", barwidth - 10) // function(d) { return x(0.01 * d.percentage) })
+		// 	.attr("height", function(d) { return height - y(d.value) - margin.top });
+			// .on("mouseover", function(d) { 
+			// 		// tooltip should appear at mouse position
+			// 		d3.select(this).style("fill",  "#e68a00");
+			// 		div.style("visibility", "visible");
+			// 		var num = 1 * d.value;
+			// 		div.html(num.toFixed(2) + "gh/capita")
+			// 		   .style("height", function(d) { 
+			// 		   		if (country.search(" ") > 0) {
+			// 		   			return "45px";
+			// 		   		}
+			// 		   	})
+			// 		   .style("left", (d3.event.pageX) + "px")
+			// 		   .style("top", (d3.event.pageY - 28) + "px");
+			// 	})
+			// .on("mouseout", function(d) { d3.select(this).style("fill", "#24435c") });
 
-		// add X axis
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(xAxis);
+		// // append label of ecological footprint specified
+	 //    bar.append("text")
+	 //    	.attr("id", "specified")
+	 //    	.attr("y", 5)
+	 //    	.attr("x", -height + 8)
+	 //    	.attr("dy", ".75em")
+	 //    	.attr("transform", "rotate(-90)")
+	 //    	.text(function(d) { return d.key })
+	 //    	.style("text-anchor", "start" );
+
+		// add x axis
+		chart.append("g")
+		    .attr("class", "x axis")
+		    .attr("transform", "translate(0," + height + ")")
+		    .call(xAxis)
+		  .append("text")
+			.attr("y", 0)
+			.attr("x", 0)
+			.attr("dy", ".71em")
+			.style("text-anchor", "start");
 
 		// add y axis
-		svg.append("g")
-			.attr("class", "y axis")
-			.call(yAxis)
-		  .append("text")
-			.attr("transform", "rotate(-90)")
-			.attr("y", -40)
+		chart.append("g")
+	  		.attr("class", "y axis")
+	  		.call(yAxis)
+	  	  .append("text")
+			.attr("y", 0)
+			.attr("x", 0)
+			.style("font-weight", "bold")
 			.attr("dy", ".71em")
-			.style("text-anchor", "end")
-			.text("Pollution Index");
-
-		// legend = svg.selectAll('.legend')
-  //       	.data(country);
-    
-	 //    var legendEnter = legend
-	 //        .enter()
-	 //        .append('g')
-	 //        .attr('class', 'legend')
-	 //        .attr('id', function(d){ return code; });
-
-		// //add the legend text
-	 //    legendEnter.append('text')
-	 //        .attr('cx', width - 20)
-	 //        .attr('cy', height - 50)
-	 //        .text(function(d){ return "Pollution Index is based on the opinions of the population"; });
-
-		// append a g for the country
-		var country = svg.selectAll(".country")
-		    .data(data)
-		  .enter().append("g")
-		    .attr("class", "country");
-
-		// Add the scatterplot
-		country.selectAll("circle")
-			.data(data)
-		  .enter().append("circle")
-			.attr("class", "circle")
-		  	.attr("id", function(d) { return "c"+ d.key })
-		    .attr("r", "1.5")
-		    .attr("cx", function(d) { if (d.key == code) { return x(d.date); }}) //console.log("yes", x(d.date)); 
-		    .attr("cy", function(d) { if (d.key == code) { return y(d.value); }})
-		    .style("stroke", "#999999");
-
-		// draw legend
-		d3.legend;
+			.style("text-anchor", "start")
+			.text("Global Hectares per Capita");
 	}
-
-
 }
 
 
